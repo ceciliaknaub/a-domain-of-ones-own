@@ -11,6 +11,7 @@ let gradientColor1;
 let gradientColor2;
 let img;
 let rug;
+let book1;
 
 const morning = {
   background: '#E5E7E9',
@@ -47,6 +48,7 @@ const night = {
 function preload(){
   img = loadImage('./assets/calendar.jpg');
   rug = loadImage('./assets/red-rug.jpeg');
+  book1 = loadImage('./assets/to_the_lighthouse_cover.png');
 }
 
 function setup() {
@@ -101,8 +103,39 @@ function draw() {
   drawWindow();
 
   //Book
-  drawBook();
+  
+  push();
+  translate(0, 0, -350);
+  drawBook(10, 100, 70,book1);
+  pop();
 
+  /*push();
+  translate(20, 5, -350);
+  drawBook(10, 90, 70,'blue');
+  pop();
+
+  push();
+  translate(40, 0, -350);
+  drawBook(10, 100, 70,'green');
+  pop();
+  
+  push();
+  translate(60, 12, -350);
+  rotateZ(-PI/12);
+  drawBook(10, 75, 70,'yellow');
+  pop();*/
+
+  //Wine bottle
+  push();
+  translate(200,250,200);
+  drawWineBottle();
+  pop();
+
+  //glass
+  push();
+  translate(200,260,225);
+  drawGlass();
+  pop();
   //Rug
   //drawRug();
 
@@ -185,34 +218,9 @@ function drawRug() {
   pop();
 }
 
-function drawBook(){
-  fill('white');
-  stroke('black');
-  push();
-  //texture(img);
-  translate(0, 0, -350);
-  box(10, 100, 70);
-  pop();
-  push();
-  //texture(img);
-  translate(20, 5, -350);
-  box(10, 90, 70);
-  pop();
-  push();
-  //texture(img);
-  translate(40, 0, -350);
-  box(10, 100, 70);
-  pop();
-  push();
-  //texture(img);
-  translate(60, 12, -350);
-  rotateZ(-PI/12);
-  box(10, 75, 70);
-  pop();  //frameRate(60);
-  //rotateZ(frameCount * 0.01);
-  //rotateX(frameCount * 0.01);
-  //rotateY(frameCount * 0.01);
-
+function drawBook(x,y,z,image){
+  texture(image);
+  box(x,y,z,color)
 }
 
 function drawCalendar() {
@@ -225,6 +233,36 @@ function drawCalendar() {
   endShape(CLOSE);
 }
 
+function drawWineBottle() {
+
+  //bottle base
+  directionalLight(53, 125, 0, 1, 0, -1);
+  noStroke();
+  cylinder(10, 60);
+  
+  //bottle neck
+  translate(0,-50);
+  noStroke();
+  cylinder(4,20);
+  
+  //spehere
+  translate(0,20);
+  sphere(10);
+  }
+
+  function drawGlass() {
+    directionalLight(242, 247, 249 , 0, -1, -1);
+    noStroke();
+    
+    sphere(10);
+    translate(0,-10);
+    cylinder(10,20);
+    translate(0,25);
+    cylinder(2,25);
+    
+    translate(0,12);
+    cylinder(10,1);
+  }
 document.addEventListener('DOMContentLoaded', function () {
 /* select item element */
 const item = document.querySelector('.item');

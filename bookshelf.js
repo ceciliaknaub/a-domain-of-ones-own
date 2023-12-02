@@ -9,6 +9,8 @@ let roomBackgroundColors = {
   night: '#191970'}
 
 let roomColor;
+let book1;
+let font1;
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -31,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function preload(){
+  book1 = loadImage('./assets/to_the_lighthouse_cover.png');
+  font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
+}
+
 function setup() {
   canvas = createCanvas(w/2,h,WEBGL);
   background(roomColor);
@@ -39,14 +46,21 @@ function setup() {
 }
 
 function draw(){
-  drawBook(0,0,0,500,0,'red');
-  drawBook(50,50,0,400,0,'blue');
-  drawBook(100,12.5,0,475,0,'green');
-  drawBook(200,45,0,475,1,'yellow');
+  drawBook(0,0,0,500,0,book1);
+  push();
+  fill(255);
+  textFont(font1);
+  rotate(PI/2);
+  translate(-150,-45,35);
+  text('To The Lighthouse',100,50);
+  pop();
+  //drawBook(50,50,0,400,0,'blue');
+ //drawBook(100,12.5,0,475,0,'green');
+  //drawBook(200,45,0,475,1,'yellow');
 }
 
-function drawBook(x,y,z,h,r,color) {
-  fill(color);
+function drawBook(x,y,z,h,r,image) {
+  texture(image);
   noStroke();
   push();
   //texture(img);

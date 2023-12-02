@@ -1,10 +1,14 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 canvas {
   display: block;
-  z-index: -1;
+}
+
+main {
+  height: 100%;
 }
 
 .box {
@@ -22,7 +26,8 @@ canvas {
 }
 
 .item {
-  height: 75px;
+  position: relative;
+  height:75px;
   width: 75px;
   background-color: #F0DB4F;
 }
@@ -55,13 +60,37 @@ h1 {
   top: 70%;
 }
 
-.cal{
+.splash {
   position: absolute;
-  height: 200px;
-  width: 300px;
-  right: 10%;
+  height: 60%;
+  width: 40%;
   top: 30%;
-  opacity: 0.5;
-  border: solid 2px black;
+  left: 50%;
+  background-color: red;
+  opacity: 0.75;
   display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.cal {
+  position: absolute;
+  top: 42%;
+  left: 65%;
+  height: 100px;
+  width: 200px;
+}
+.book-links {
+  position: absolute;
+  top: 42%;
+  left: 35%;
+  height: 100px;
+  width: 150px;
+}
+
+/*Bookshelf*/
+.bookshelf-container {
+  height: 100%;
+  width: 100%;
 }

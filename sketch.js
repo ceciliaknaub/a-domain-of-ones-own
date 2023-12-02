@@ -1,5 +1,5 @@
 let angleX = 0;
-let angleY = 1.3;
+let angleY = 0;
 let cubeSize = window.innerHeight;
 
 let w = window.innerWidth;
@@ -52,19 +52,14 @@ function preload(){
 function setup() {
   createCanvas(w, h, WEBGL);
   //rectMode(CENTER);
-
-  //image(img,0,0,img.width / 2, img.height / 2);
   }
 
 function draw() {
   const date = new Date();
   let hour = date.getHours();
   
- //stroke(132,191,243);
- // text("(" + mouseX + ", " + mouseY + ")", mouseX, mouseY);
 
   angleY = map(mouseX, 0, width, -PI, PI);
-  //rotateY(angleY);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
   
   noStroke();
@@ -104,26 +99,27 @@ function draw() {
 
   //Window
   drawWindow();
-  //drawWindowTrim();
 
   //Book
-  //drawBook();
+  drawBook();
 
   //Rug
   //drawRug();
 
+    // left wall art
+    //fill('brown');
+    //beginShape();
+    //vertex(-cubeSize / 6, -cubeSize / 12, -cubeSize / 1.5); 
+    //vertex(cubeSize / 6, -cubeSize / 12, -cubeSize / 1.5);
+    //vertex(cubeSize / 6, cubeSize / 12, -cubeSize / 1.5);
+    //vertex(-cubeSize / 6, cubeSize / 12, -cubeSize / 1.5);
+    //endShape(CLOSE);
+
 if (angleY > 1.2) {
   drawCalendar();
 }
-  // left wall art
-  //fill('brown');
-  //beginShape();
-  //vertex(-cubeSize / 6, -cubeSize / 12, -cubeSize / 2); 
-  //vertex(cubeSize / 6, -cubeSize / 12, -cubeSize / 2);
-  //vertex(cubeSize / 6, cubeSize / 12, -cubeSize / 2);
-  //vertex(-cubeSize / 6, cubeSize / 12, -cubeSize / 2);
-  //box()
-  //endShape(CLOSE);
+
+
 }
 
 function drawBottomFace(color) {
@@ -163,7 +159,7 @@ function drawWindow() {
   pop();
 }
 
-function drawWindowTrim() {
+/*function drawWindowTrim() {
   push();
   beginShape();
   strokeWeight(2);
@@ -175,7 +171,7 @@ function drawWindowTrim() {
   vertex(cubeSize / 2, cubeSize / 5, -cubeSize / 8);
   endShape(CLOSE);
   pop();
-}
+}*/
 
 function drawRug() {
   push();
@@ -190,16 +186,33 @@ function drawRug() {
 }
 
 function drawBook(){
-  push();
-  texture(img);
+  fill('white');
   stroke('black');
-  frameRate(60);
-  //translate(0, -100, 0);
-  //rotateZ(frameCount * 0.01);
-  rotateX(frameCount * 0.01);
-  //rotateY(frameCount * 0.01);
-  box(70, 100, 10);
+  push();
+  //texture(img);
+  translate(0, 0, -350);
+  box(10, 100, 70);
   pop();
+  push();
+  //texture(img);
+  translate(20, 5, -350);
+  box(10, 90, 70);
+  pop();
+  push();
+  //texture(img);
+  translate(40, 0, -350);
+  box(10, 100, 70);
+  pop();
+  push();
+  //texture(img);
+  translate(60, 12, -350);
+  rotateZ(-PI/12);
+  box(10, 75, 70);
+  pop();  //frameRate(60);
+  //rotateZ(frameCount * 0.01);
+  //rotateX(frameCount * 0.01);
+  //rotateY(frameCount * 0.01);
+
 }
 
 function drawCalendar() {
@@ -229,6 +242,31 @@ function dragStart(e) {
     }, 0);
 }
 
+/*Bookshelf Link
+let bookLink = document.querySelector('.book-links') 
+
+bookLink.addEventListener('mouseover', function(){
+  bookLink.style.background = 'black';
+  bookLink.style.opacity = '0.25';
+})
+
+bookLink.addEventListener('mouseout', function(){
+  bookLink.style.background = 'none';
+})
+
+/*Calendar Link
+let calLink = document.querySelector('.cal') 
+
+calLink.addEventListener('mouseover', function(){
+  calLink.style.background = 'black';
+  calLink.style.opacity = '0.25';
+})
+
+calLink.addEventListener('mouseout', function(){
+  calLink.style.background = 'none';
+})
+*/
+
 /* drop targets */
 const boxes = document.querySelectorAll('.box');
 
@@ -238,6 +276,8 @@ boxes.forEach(box => {
     box.addEventListener('dragleave', dragLeave);
     box.addEventListener('drop', drop);
 });
+
+//splash();
 
 function dragEnter(e) {
     e.preventDefault();
@@ -268,4 +308,14 @@ function drop(e) {
 }
 
   /*Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/ */
+
+function splash() {
+  let splashscreen = document.querySelector('.splash');
+  splashscreen.addEventListener('click',() => {
+    splashscreen.style.opacity=0;
+    setTimeout(()=>{
+      splashScreen.classList.add('hide')
+    },610)
+  })
+}
 })

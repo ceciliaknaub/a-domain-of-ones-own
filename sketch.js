@@ -239,7 +239,7 @@ function drawCalendar() {
   noStroke();
   rotate(PI/2);
   translate(0,0,cubeSize/2);
-  box(200,250,1);
+  box(100,150,1);
   endShape(CLOSE);
 }
 

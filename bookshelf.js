@@ -51,62 +51,36 @@ function setup() {
 }
 
 function draw(){
-  drawBook(500,50,0,book1,'To The Lighthouse',font1,255);
-  push();
-  rotate(PI/2);
-  translate(0,0,40);
-  textAlign(CENTER);
-  text("To The Lighthouse",0,10);
-  pop();
+  drawBook(500,50,0,book1,'Virginia Wolf','To The Lighthouse',font1,255);
+  //bookText('Virginia Wolf','To The Lighthouse',font1,255);
   
   translate(57,12,0);
-  drawBook(475,65,0,book2,'SHOE DOG',font2,'#A9672A');
-  push();
-  rotate(PI/2);
-  translate(0,0,40);
-  textAlign(CENTER);
-  text("SHOE DOG",0,10);
-  pop();
+  drawBook(475,65,0,book2,'Phil Knight','SHOE DOG',font2,'#A9672A');
+  //bookText('Phil Knight','SHOE DOG',font2,'#A9672A');
 
   translate(50,0,0);
-  drawBook(475,45,0,book3,'The Year of Magical Thinking',font1,'black');
-  push();
-  rotate(PI/2);
-  translate(0,0,40);
-  textAlign(CENTER);
-  push();
-  textSize(18);
-  textAlign(CENTER);
-  translate(-150,0,40);
-  text("Joan Didion",0,10);
-  pop();
-  textSize(14);
-  text("The Year of Magical Thinking",0,10);
-  pop();
-
-  //drawBook(0,50,0,400,0,'blue');
- //drawBook(100,12.5,0,475,0,'green');
-  //drawBook(200,45,0,475,1,'yellow');
+  drawBook(475,45,0,book3,'Joan Didion','The Year of Magical Thinking',font1,'black');
 }
 
-function drawBook(h,w,r,image,title,font,textColor) {
-  bookStyle(image,title,font,textColor);
+function drawBook(h,w,r,image, author, title,font,textColor) {
+  //bookStyle(image,title,font,textColor);
   noStroke();
   rotateZ(-PI*r/24);
+  texture(image);
   box(w, h, 70);
+  bookText(author,title,font,textColor);
 }
 
-function bookStyle(image,title,font,textColor) {
-  fill(textColor);
+function bookText(author,title,font,textColor) {
+  push();
   textFont(font);
-  texture(image);
-  textSize(24);
-  /*push();
-  translate(0,0,38);
+  fill(textColor);
+  translate(0,0,40);
   rotate(PI/2);
   textAlign(CENTER);
-  text(title,0, 10);
-  pop();*/
+  textSize(14);
+  text(title,0, 5);
+  textSize(18);
+  text(author,-150, 5);
+  pop();
 }
-
-

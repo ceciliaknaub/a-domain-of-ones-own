@@ -10,7 +10,9 @@ let roomBackgroundColors = {
 
 let roomColor;
 let book1;
+let book2;
 let font1;
+let font2;
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -35,7 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function preload(){
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
+  book2 =  loadImage('./assets/shoe_dog_cover.jpg');
+  book3 = loadImage('./assets/didion_cover.png');
   font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
+  font2 = loadFont('./assets/Hind/Hind-Bold.ttf');
 }
 
 function setup() {
@@ -46,29 +51,62 @@ function setup() {
 }
 
 function draw(){
-  drawBook(0,0,0,500,0,book1);
+  drawBook(500,50,0,book1,'To The Lighthouse',font1,255);
   push();
-  fill(255);
-  textFont(font1);
   rotate(PI/2);
-  translate(-150,-45,35);
-  text('To The Lighthouse',100,50);
+  translate(0,0,40);
+  textAlign(CENTER);
+  text("To The Lighthouse",0,10);
   pop();
-  //drawBook(50,50,0,400,0,'blue');
+  
+  translate(57,12,0);
+  drawBook(475,65,0,book2,'SHOE DOG',font2,'#A9672A');
+  push();
+  rotate(PI/2);
+  translate(0,0,40);
+  textAlign(CENTER);
+  text("SHOE DOG",0,10);
+  pop();
+
+  translate(50,0,0);
+  drawBook(475,45,0,book3,'The Year of Magical Thinking',font1,'black');
+  push();
+  rotate(PI/2);
+  translate(0,0,40);
+  textAlign(CENTER);
+  push();
+  textSize(18);
+  textAlign(CENTER);
+  translate(-150,0,40);
+  text("Joan Didion",0,10);
+  pop();
+  textSize(14);
+  text("The Year of Magical Thinking",0,10);
+  pop();
+
+  //drawBook(0,50,0,400,0,'blue');
  //drawBook(100,12.5,0,475,0,'green');
   //drawBook(200,45,0,475,1,'yellow');
 }
 
-function drawBook(x,y,z,h,r,image) {
-  texture(image);
+function drawBook(h,w,r,image,title,font,textColor) {
+  bookStyle(image,title,font,textColor);
   noStroke();
-  push();
-  //texture(img);
   rotateZ(-PI*r/24);
-  translate(x, y, z);
-  box(50, h, 70);
-  pop();
-  push();
+  box(w, h, 70);
+}
+
+function bookStyle(image,title,font,textColor) {
+  fill(textColor);
+  textFont(font);
+  texture(image);
+  textSize(24);
+  /*push();
+  translate(0,0,38);
+  rotate(PI/2);
+  textAlign(CENTER);
+  text(title,0, 10);
+  pop();*/
 }
 
 

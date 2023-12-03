@@ -10,7 +10,6 @@ let floorColor;
 let gradientColor1;
 let gradientColor2;
 let img;
-let rug;
 let book1;
 
 const morning = {
@@ -47,8 +46,9 @@ const night = {
 
 function preload(){
   img = loadImage('./assets/calendar.jpg');
-  rug = loadImage('./assets/red-rug.jpeg');
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
+  book2 =  loadImage('./assets/shoe_dog_cover.jpg');
+  book3 = loadImage('./assets/didion_cover.png');
 }
 
 function setup() {
@@ -108,10 +108,20 @@ function draw() {
   translate(0, 0, -350);
   drawBook(10, 100, 70,book1);
   pop();
+  
+  push();
+  translate(10, 10, -350);
+  drawBook(15, 80, 70,book2);
+  pop();
+
+  push();
+  translate(20, 10, -350);
+  drawBook(8, 80, 70,book3);
+  pop();
 
   /*push();
   translate(20, 5, -350);
-  drawBook(10, 90, 70,'blue');
+  drawBook(10, 90, 80,'blue');
   pop();
 
   push();

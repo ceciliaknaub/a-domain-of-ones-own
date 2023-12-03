@@ -49,6 +49,7 @@ function preload(){
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
   book2 =  loadImage('./assets/shoe_dog_cover.jpg');
   book3 = loadImage('./assets/didion_cover.png');
+  book4 = loadImage('./assets/bell_hooks_cover.png');
 }
 
 function setup() {
@@ -119,6 +120,11 @@ function draw() {
   drawBook(8, 80, 70,book3);
   pop();
 
+  push();
+  translate(30, 10, -350);
+  drawBook(10, 80, 70,book4);
+  pop();
+
   /*push();
   translate(20, 5, -350);
   drawBook(10, 90, 80,'blue');
@@ -138,7 +144,7 @@ function draw() {
   //Wine bottle
   push();
   translate(200,250,200);
-  drawWineBottle();
+  let bottle = drawWineBottle();
   pop();
 
   //glass

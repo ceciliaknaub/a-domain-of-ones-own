@@ -39,6 +39,7 @@ function preload(){
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
   book2 =  loadImage('./assets/shoe_dog_cover.jpg');
   book3 = loadImage('./assets/didion_cover.png');
+  book4 = loadImage('./assets/bell_hooks_cover.png');
   font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
   font2 = loadFont('./assets/Hind/Hind-Bold.ttf');
 }
@@ -52,18 +53,18 @@ function setup() {
 
 function draw(){
   drawBook(500,50,0,book1,'Virginia Wolf','To The Lighthouse',font1,255);
-  //bookText('Virginia Wolf','To The Lighthouse',font1,255);
   
   translate(57,12,0);
   drawBook(475,65,0,book2,'Phil Knight','SHOE DOG',font2,'#A9672A');
-  //bookText('Phil Knight','SHOE DOG',font2,'#A9672A');
 
   translate(50,0,0);
   drawBook(475,45,0,book3,'Joan Didion','The Year of Magical Thinking',font1,'black');
+
+  translate(50,0,0);
+  drawBook(475,45,0,book4,'bell hooks','all about love',font1,'black');
 }
 
 function drawBook(h,w,r,image, author, title,font,textColor) {
-  //bookStyle(image,title,font,textColor);
   noStroke();
   rotateZ(-PI*r/24);
   texture(image);

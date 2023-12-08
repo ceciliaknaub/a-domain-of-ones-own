@@ -47,7 +47,7 @@ const night = {
 function preload(){
   img = loadImage('./assets/calendar.jpg');
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
-  book2 =  loadImage('./assets/shoe_dog_cover.jpg');
+  book2 =  loadImage('./assets/shoe_dog_cover.png');
   book3 = loadImage('./assets/didion_cover.png');
   book4 = loadImage('./assets/bell_hooks_cover.png');
 }
@@ -104,7 +104,6 @@ function draw() {
   drawWindow();
 
   //Book
-  
   push();
   translate(0, 0, -350);
   drawBook(10, 100, 70,book1);
@@ -124,22 +123,6 @@ function draw() {
   translate(30, 10, -350);
   drawBook(10, 80, 70,book4);
   pop();
-
-  /*push();
-  translate(20, 5, -350);
-  drawBook(10, 90, 80,'blue');
-  pop();
-
-  push();
-  translate(40, 0, -350);
-  drawBook(10, 100, 70,'green');
-  pop();
-  
-  push();
-  translate(60, 12, -350);
-  rotateZ(-PI/12);
-  drawBook(10, 75, 70,'yellow');
-  pop();*/
 
   //Wine bottle
   push();

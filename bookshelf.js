@@ -1,4 +1,3 @@
-let canvas;
 let w = window.innerWidth;
 let h = window.innerHeight; 
 
@@ -13,6 +12,97 @@ let book1;
 let book2;
 let font1;
 let font2;
+let clickCount = 0;
+
+let objects = []
+let books = [];
+
+class Book {
+  constructor (w, h ,x ,y,img,title,author,font,textColor) {
+      this.w = w,
+      this.h = h,
+      this.x = x,
+      this.y = y,
+      this.img = img,
+      this.title = title,
+      this.author = author,
+      this.font = font,
+      this.textColor = textColor
+    }
+    clicked() {
+      if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
+	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
+        clickCount += 1;
+        console.log('clicked');
+        bookmarkText(this.title,50,50*clickCount);
+        console.log(clickCount);
+	  } else {
+      //console.log('not clicked');
+    }
+    }
+
+    drawBook() {
+      push();
+        image(this.img,this.x,this.y);
+        //rect(this.x,this.y,this.w,this.h);
+        push();
+        textFont(this.font);
+        fill(this.textColor);
+        translate(this.x + this.w/2,this.y + this.h/1.75);
+        rotate(PI/2);
+        textAlign(CENTER);
+        textSize(14);
+        text(this.title,0, 5);
+        textSize(18);
+        text(this.author,-150, 5);
+    pop();
+    }
+}
+function preload(){
+  book1 = loadImage('./assets/to_the_lighthouse_cover.png');
+  book2 =  loadImage('./assets/shoe_dog_cover.png');
+  book3 = loadImage('./assets/didion_cover.png');
+  book4 = loadImage('./assets/bell_hooks_cover.png');
+  font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
+  font2 = loadFont('./assets/Hind/Hind-Bold.ttf');
+}
+let book;
+
+function setup() {
+  let canvas = createCanvas(w,h);
+  //canvas.parent("sketch");
+
+  append(books,new Book(50, 400, w/4, h/4 - 25, book1,'To The Lighthouse','Virginia Wolf',font1,255));
+  append(books, new Book(70,450,w/4 + 50, h/4 - 75, book2,'SHOE DOG','Phil Knight',font2,'#A9672A'));
+  append(books, new Book(45,375, w/4 + 120, h/4,book3,'The Year of Magical Thinking','Joan Didion',font1,'black'));
+  append(books, new Book(45,375, w/4 + 160, h/4,book4,'all about love','bell hooks',font1,'black'));
+
+}
+
+function draw(){
+  background(roomColor);
+   
+  noStroke();
+
+  for (i = 0; i < books.length; i++) {
+    book = books[i];
+    book.drawBook();
+  }
+}
+
+function mousePressed() {
+    for (i = 0; i < books.length; i++) {
+        book = books[i];
+        book.clicked(book.title,i);
+    }
+  }
+
+function bookmarkText(text,x,y) {
+  let h1 = createElement('h1',text)
+  h1.position(x, y);
+}
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -31,57 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
           }
 
 
-    document.querySelector('.bookshelf-container').style.background = roomColor;
-
+    //document.querySelector('.bookshelf-container').style.background = roomColor;
 });
 
-function preload(){
-  book1 = loadImage('./assets/to_the_lighthouse_cover.png');
-  book2 =  loadImage('./assets/shoe_dog_cover.jpg');
-  book3 = loadImage('./assets/didion_cover.png');
-  book4 = loadImage('./assets/bell_hooks_cover.png');
-  font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
-  font2 = loadFont('./assets/Hind/Hind-Bold.ttf');
-}
-
-function setup() {
-  canvas = createCanvas(w/2,h,WEBGL);
-  background(roomColor);
-  //background('white');
-  canvas.position(w/4,0);
-}
-
-function draw(){
-  drawBook(500,50,0,book1,'Virginia Wolf','To The Lighthouse',font1,255);
-  
-  translate(57,12,0);
-  drawBook(475,65,0,book2,'Phil Knight','SHOE DOG',font2,'#A9672A');
-
-  translate(50,0,0);
-  drawBook(475,45,0,book3,'Joan Didion','The Year of Magical Thinking',font1,'black');
-
-  translate(50,0,0);
-  drawBook(475,45,0,book4,'bell hooks','all about love',font1,'black');
-}
-
-function drawBook(h,w,r,image, author, title,font,textColor) {
-  noStroke();
-  rotateZ(-PI*r/24);
-  texture(image);
-  box(w, h, 70);
-  bookText(author,title,font,textColor);
-}
-
-function bookText(author,title,font,textColor) {
-  push();
-  textFont(font);
-  fill(textColor);
-  translate(0,0,40);
-  rotate(PI/2);
-  textAlign(CENTER);
-  textSize(14);
-  text(title,0, 5);
-  textSize(18);
-  text(author,-150, 5);
-  pop();
-}

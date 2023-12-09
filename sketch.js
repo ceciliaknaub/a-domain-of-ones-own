@@ -11,6 +11,13 @@ let gradientColor1;
 let gradientColor2;
 let img;
 let book1;
+let pts;
+let pts2;
+let font1;
+let wallColors = ['red','magenta','pink','blue'];
+let ceilingFlooorColors = ['red','magenta','pink','blue'];
+let index = 0;
+let partyCount = 9;
 
 const morning = {
   background: '#E5E7E9',
@@ -50,28 +57,44 @@ function preload(){
   book2 =  loadImage('./assets/shoe_dog_cover.png');
   book3 = loadImage('./assets/didion_cover.png');
   book4 = loadImage('./assets/bell_hooks_cover.png');
+  font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
 }
 
 function setup() {
   createCanvas(w, h, WEBGL);
+  setInterval(changeColor, 750);
   //rectMode(CENTER);
+  pts = font1.textToPoints('A Domain', 0, 0, 50,{
+    sampleFactor: 0.15,
+    simplifyThreshold: 0
+      
+  });
+  
+  pts2 = font1.textToPoints("Of One's Own", 0, 0, 50,{
+    sampleFactor: 0.15,
+    simplifyThreshold: 0
+      
+  });
   }
 
 function draw() {
   const date = new Date();
-  let hour = date.getHours();
-  
-
+  let hour =  date.getHours();
   angleY = map(mouseX, 0, width, -PI, PI);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
   
   noStroke();
-  
+
   if (hour >= 20) {
-    directionalLight(242, 0, 249 , 0, -1, -1);
-    background(night.background);
-    ceilingColor = night.ceiling;
-    floorColor = night.floor;
+    if( int(random(1,30) == partyCount)) {
+      background(wallColors[index])
+      ceilingColor = wallColors[index]
+      floorColor = ceilingFlooorColors[index]
+    } else {
+      background(night.background);
+      ceilingColor = night.ceiling;
+      floorColor = night.floor;  
+    }
     gradientColor1 = night.gradientColor1
     gradientColor2 = night.gradientColor2;
   } else if (hour >=17) {
@@ -105,6 +128,12 @@ function draw() {
   drawWindow();
 
   //Book
+
+  //directionalLight(242, 0, 249 , 0, -1, -1);
+  push();
+  if (hour >= 20) {
+    directionalLight(25, 0, 100, 1, 0, -1);
+  }
   push();
   translate(0, 0, -350);
   drawBook(10, 100, 70,book1);
@@ -125,30 +154,58 @@ function draw() {
   drawBook(10, 80, 70,book4);
   pop();
 
-  //Wine bottle
   push();
-  translate(200,250,200);
-  let bottle = drawWineBottle();
+  translate(-10, 55,  -350);
+  fill('brown');
+  box(150, 10, 70);
   pop();
+  pop();
+
+
+
+  //Wine bottle
+  //push();
+ //translate(200,250,200);
+  //drawWineBottle();
+  //pop();
+
+  //FrenchPress
+  //push();
+  //translate(200,250,200);
+  //drawFrenchPress();
+  //pop();
+
+  //Mug
+  push();
+  translate(200,325,100);
+  drawMug(255,0,0);
+  pop();
+
+  push();
+  translate(200,325,150);
+  drawMug(255,225,0);
+  pop();
+
+  push();
+  translate(200,325,100);
+  drawMug(255,0,0);
+  pop();
+
+  //drawHeader();
 
   //glass
-  push();
-  translate(200,260,225);
-  drawGlass();
-  pop();
+  //push();
+  //translate(200,260,225);
+  //drawGlass();
+  //pop();
+
   //Rug
   //drawRug();
-
-    // left wall art
-    //fill('brown');
-    //beginShape();
-    //vertex(-cubeSize / 6, -cubeSize / 12, -cubeSize / 1.5); 
-    //vertex(cubeSize / 6, -cubeSize / 12, -cubeSize / 1.5);
-    //vertex(cubeSize / 6, cubeSize / 12, -cubeSize / 1.5);
-    //vertex(-cubeSize / 6, cubeSize / 12, -cubeSize / 1.5);
-    //endShape(CLOSE);
-
+  
 if (angleY > 1.2) {
+  if (hour >= 20) {
+    directionalLight(25, 0, 100, 1, 0, -1);
+  }
   drawCalendar();
 }
 
@@ -233,6 +290,72 @@ function drawCalendar() {
   endShape(CLOSE);
 }
 
+function drawMug(r,g,b) {
+  rotateY(-PI/3);
+  push();
+  directionalLight(r,g,b, 0, 0, -1);
+  noStroke();
+  //cylinder(20, 100);
+  
+  //coffee
+  push();
+  translate(0,-30,0)
+  fill('brown');
+  cylinder(15,1);
+  pop();
+  //base
+  //sphere(15);
+  translate(0,-15);
+  cylinder(15,30);
+  
+  
+  //handle
+  translate(10,0);
+  torus(12,3);
+  pop();
+  }
+
+  function drawFrenchPress() {
+    noStroke();
+    push();
+    //directionalLight(255, 255, 255 , 0, -0.5, -1);
+    //cylinder(20, 100);
+    
+    //directionalLight(250, 250, 250, -.845, -.425, -1);
+    cylinder(20,80);
+    pop();
+    
+    //base
+    push();
+    fill('black');
+    translate(0,40);
+    cylinder(20,10);
+    pop();
+    
+    //lid
+    push();
+    fill('black');
+    translate(0,-40);
+    sphere(20);
+    pop();
+    
+    //handle
+    push();
+    fill('black');
+    translate(20,0);
+    torus(15, 5);
+    pop();
+  
+    //plunger
+    push();
+    fill('black');
+    translate(0,-60);
+    sphere(5);
+    pop();
+    
+    
+    }
+
 function drawWineBottle() {
 
   //bottle base
@@ -263,6 +386,34 @@ function drawWineBottle() {
     translate(0,12);
     cylinder(10,1);
   }
+
+  function drawHeader() {
+    //strokeWeight(10);
+    translate(0, 50);
+    beginShape(POINTS);
+    stroke(255);
+    for(let i =0; i< pts.length; i++){
+     vertex(pts[i].x + sin(frameCount*0.05 + pts[i].y*0.1)*5, pts[i].y);
+    }
+    endShape();
+    
+    translate(0, 50);
+    beginShape(POINTS);
+    stroke(255);
+    for(let i =0; i< pts2.length; i++){
+     vertex(pts2[i].x + sin(frameCount*0.05 + pts2[i].y*0.1)*5, pts2[i].y);
+    }
+    endShape();
+  }
+
+  function changeColor(){  
+    index++; 
+     
+     if(index >= colors.length){
+      index = 0; 
+       
+     }
+   }
 document.addEventListener('DOMContentLoaded', function () {
 /* select item element */
 const item = document.querySelector('.item');
@@ -279,31 +430,6 @@ function dragStart(e) {
         e.target.classList.add('hide');
     }, 0);
 }
-
-/*Bookshelf Link
-let bookLink = document.querySelector('.book-links') 
-
-bookLink.addEventListener('mouseover', function(){
-  bookLink.style.background = 'black';
-  bookLink.style.opacity = '0.25';
-})
-
-bookLink.addEventListener('mouseout', function(){
-  bookLink.style.background = 'none';
-})
-
-/*Calendar Link
-let calLink = document.querySelector('.cal') 
-
-calLink.addEventListener('mouseover', function(){
-  calLink.style.background = 'black';
-  calLink.style.opacity = '0.25';
-})
-
-calLink.addEventListener('mouseout', function(){
-  calLink.style.background = 'none';
-})
-*/
 
 /* drop targets */
 const boxes = document.querySelectorAll('.box');

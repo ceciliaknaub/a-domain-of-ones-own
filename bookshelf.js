@@ -16,6 +16,7 @@ let clickCount = 0;
 
 let objects = []
 let books = [];
+let test;
 
 class Book {
   constructor (w, h ,x ,y,img,title,author,font,textColor) {
@@ -29,16 +30,14 @@ class Book {
       this.font = font,
       this.textColor = textColor
     }
+
     clicked() {
       if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
-        clickCount += 1;
-        console.log('clicked');
-        bookmarkText(this.title,w/2,50*clickCount);
-        console.log(clickCount);
-	  } else {
-      //console.log('not clicked');
-    }
+        //clickCount += 1;
+        removeElements();
+        bookmarkText(this.title,this.author,w/2,50);
+	  }
     }
 
     drawBook() {
@@ -70,6 +69,7 @@ let book;
 
 function setup() {
   let canvas = createCanvas(w,h);
+    background(roomColor);
   //canvas.parent("sketch");
 
   append(books,new Book(50, 400, w/4, h/4 - 25, book1,'To The Lighthouse','Virginia Wolf',font1,255));
@@ -80,7 +80,7 @@ function setup() {
 }
 
 function draw(){
-  background(roomColor);
+  //background(roomColor);
    
   noStroke();
 
@@ -88,21 +88,28 @@ function draw(){
     book = books[i];
     book.drawBook();
   }
+
 }
 
 function mousePressed() {
     for (i = 0; i < books.length; i++) {
         book = books[i];
-        book.clicked(book.title,i);
+        book.clicked();
     }
   }
 
-function bookmarkText(text,x,y) {
-  let h2 = createElement('h2',text)
-  h2.position(x, y);
+function bookmarkText(title,author,x,y) {
+  let p1 = createElement('p',title + ' ' + author)
+  p1.position(x, y);
+  //rotate(PI/2);
+  //text(title,500,500);
+  p1.addClass('book-left');
+
+  let p2 = createElement('p',title + ' ' + author);
+  p2.position(x + 300, y);
+  p2.addClass('book-right');
+
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
 

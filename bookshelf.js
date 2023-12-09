@@ -34,7 +34,7 @@ class Book {
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
         clickCount += 1;
         console.log('clicked');
-        bookmarkText(this.title,50,50*clickCount);
+        bookmarkText(this.title,w/2,50*clickCount);
         console.log(clickCount);
 	  } else {
       //console.log('not clicked');
@@ -98,8 +98,8 @@ function mousePressed() {
   }
 
 function bookmarkText(text,x,y) {
-  let h1 = createElement('h1',text)
-  h1.position(x, y);
+  let h2 = createElement('h2',text)
+  h2.position(x, y);
 }
 
 

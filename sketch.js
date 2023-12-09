@@ -68,6 +68,7 @@ function draw() {
   noStroke();
   
   if (hour >= 20) {
+    directionalLight(242, 0, 249 , 0, -1, -1);
     background(night.background);
     ceilingColor = night.ceiling;
     floorColor = night.floor;

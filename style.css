@@ -77,11 +77,6 @@ h1 {
 }
 
 /*Bookshelf*/
-#sketch{
-  display: flex;
-  flex-direction: row;
-  height:100%;
-}
 
 .book-left {
     float: left;
@@ -91,11 +86,12 @@ h1 {
       padding-left: 6%;
       padding-top: 4%;
       position: relative;
-      -webkit-transform: rotate(10deg) skew(10deg, 0);
-         -moz-transform: rotate(10deg) skew(10deg, 0);
-          -ms-transform: rotate(10deg) skew(10deg, 0);
-           -o-transform: rotate(10deg) skew(10deg, 0);
-              transform: rotate(10deg) skew(10deg, 0);
+      -webkit-transform: rotate(6deg) skew(6deg, 0);
+         -moz-transform: rotate(6deg) skew(6deg, 0);
+          -ms-transform: rotate(6deg) skew(6deg, 0);
+           -o-transform: rotate(6deg) skew(6deg, 0);
+              transform: rotate(6deg) skew(6deg, 0);
+              z-index: 1;
     
   }
 
@@ -109,13 +105,10 @@ h1 {
       display: inline-block;
       margin-top: 1em;
       position: relative;
-      -webkit-transform: rotate(-10deg) skew(-10deg, 0);
-         -moz-transform: rotate(-10deg) skew(-10deg, 0);
-          -ms-transform: rotate(-10deg) skew(-10deg, 0);
-           -o-transform: rotate(-10deg) skew(-10deg, 0);
-              transform: rotate(-10deg) skew(-10deg, 0);
-  }
-
-  #book_background {
-    z-index: 1;
+      -webkit-transform: rotate(-6deg) skew(-6deg, 0);
+         -moz-transform: rotate(-6deg) skew(-6deg, 0);
+          -ms-transform: rotate(-6deg) skew(-6deg, 0);
+           -o-transform: rotate(-6deg) skew(-6deg, 0);
+              transform: rotate(-6deg) skew(-6deg, 0);
+              z-index: 1;
   }

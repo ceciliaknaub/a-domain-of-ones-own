@@ -38,6 +38,7 @@ class Book {
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
         //clickCount += 1;
         removeElements();
+        background(roomColor);
         bookmarkText(this.title,this.author,w/2,50);
 
         //return button clears all book text
@@ -45,17 +46,16 @@ class Book {
         returnButton.position(w/2,500);
         returnButton.mousePressed(() => {
           removeElements();
-          fill(roomColor);
+          background(roomColor);
           });
                
         //bookmark button creates a shape and saves the text to the array
         bookmarkButton = createButton('Bookmark')
         bookmarkButton.position(w/1.25,500)
         bookmarkButton.mousePressed(() => {
-          console.log('bookmark button clicked')
+          fill('yellow');
+          rect(w/1.45,100,50,50);
                   })
-
-
       }
     }
 
@@ -78,10 +78,14 @@ class Book {
 
 }
 function preload(){
+  //images
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
   book2 =  loadImage('./assets/shoe_dog_cover.png');
   book3 = loadImage('./assets/didion_cover.png');
   book4 = loadImage('./assets/bell_hooks_cover.png');
+  //book_backround = loadImage('./assets/book_background.png')
+
+  //fonts
   font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
   font2 = loadFont('./assets/Hind/Hind-Bold.ttf');
 }
@@ -139,9 +143,18 @@ function bookmarkText(title,author,x,y) {
   p2.position(x + 300, y);
   p2.addClass('book-right');
   //text(title + ' ' + author,x,y);
+
+  //let img = createImg('./assets/book_background.png','white book pages');
+  //img.position(x + 60,y + 25);
+
+  beginShape();
+  translate(x,y);
+  fill('white');
+  vertex(50,50);
+  vertex(50,400);
+  vertex(250,385);
+  vertex(450,400);
+  vertex(450,50);
+  vertex(250,75);
+  endShape();
 };
-
-
-//remove book from page
-/**/
-

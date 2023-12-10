@@ -17,6 +17,8 @@ let clickCount = 0;
 let objects = []
 let books = [];
 let test;
+let returnButton;
+let bookmarkButton;
 
 class Book {
   constructor (w, h ,x ,y,img,title,author,font,textColor) {
@@ -31,13 +33,30 @@ class Book {
       this.textColor = textColor
     }
 
-    clicked() {
+    bookClicked() {
       if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
         //clickCount += 1;
         removeElements();
         bookmarkText(this.title,this.author,w/2,50);
-	  }
+
+        //return button clears all book text
+        returnButton = createButton('Return')
+        returnButton.position(w/2,500);
+        returnButton.mousePressed(() => {
+          removeElements();
+          fill(roomColor);
+          });
+               
+        //bookmark button creates a shape and saves the text to the array
+        bookmarkButton = createButton('Bookmark')
+        bookmarkButton.position(w/1.25,500)
+        bookmarkButton.mousePressed(() => {
+          console.log('bookmark button clicked')
+                  })
+
+
+      }
     }
 
     drawBook() {
@@ -56,6 +75,7 @@ class Book {
         text(this.author,-150, 5);
     pop();
     }
+
 }
 function preload(){
   book1 = loadImage('./assets/to_the_lighthouse_cover.png');
@@ -68,9 +88,22 @@ function preload(){
 let book;
 
 function setup() {
-  let canvas = createCanvas(w,h);
-    background(roomColor);
-  //canvas.parent("sketch");
+  const date = new Date();
+  let hour = date.getHours();
+
+  if (hour >= 20 || hour <= 5) {
+    roomColor = roomBackgroundColors.night;
+  } else if (hour >=17) {
+    roomColor = roomBackgroundColors.evening;
+  } else if (hour >=14){
+    roomColor = roomBackgroundColors.afternoon;
+  }
+  else {
+    roomColor = roomBackgroundColors.morning;
+  }
+  createCanvas(w,h);
+  background(roomColor);
+
 
   append(books,new Book(50, 400, w/4, h/4 - 25, book1,'To The Lighthouse','Virginia Wolf',font1,255));
   append(books, new Book(70,450,w/4 + 50, h/4 - 75, book2,'SHOE DOG','Phil Knight',font2,'#A9672A'));
@@ -80,54 +113,35 @@ function setup() {
 }
 
 function draw(){
-  //background(roomColor);
-   
+
   noStroke();
 
   for (i = 0; i < books.length; i++) {
     book = books[i];
     book.drawBook();
   }
-
 }
 
 function mousePressed() {
     for (i = 0; i < books.length; i++) {
         book = books[i];
-        book.clicked();
-    }
+        book.bookClicked();
+    } 
   }
 
 function bookmarkText(title,author,x,y) {
+
   let p1 = createElement('p',title + ' ' + author)
   p1.position(x, y);
-  //rotate(PI/2);
-  //text(title,500,500);
   p1.addClass('book-left');
 
   let p2 = createElement('p',title + ' ' + author);
   p2.position(x + 300, y);
   p2.addClass('book-right');
-
-}
-
-document.addEventListener('DOMContentLoaded', function () {
+  //text(title + ' ' + author,x,y);
+};
 
 
-    const date = new Date();
-    let hour = date.getHours();
-       if (hour >= 20) {
-            roomColor = roomBackgroundColors.night;
-          } else if (hour >=17) {
-            roomColor = roomBackgroundColors.evening;
-          } else if (hour >=14){
-            roomColor = roomBackgroundColors.afternoon;
-          }
-          else {
-            roomColor = roomBackgroundColors.morning;
-          }
-
-
-    //document.querySelector('.bookshelf-container').style.background = roomColor;
-});
+//remove book from page
+/**/
 

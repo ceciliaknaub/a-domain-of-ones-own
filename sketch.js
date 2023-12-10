@@ -14,10 +14,10 @@ let book1;
 let pts;
 let pts2;
 let font1;
-let wallColors = ['red','magenta','pink','blue'];
-let ceilingFlooorColors = ['red','magenta','pink','blue'];
+let wallColors = ['red','magenta','blue'];
+let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
 let index = 0;
-let partyCount = 9;
+let partyCount;
 
 const morning = {
   background: '#E5E7E9',
@@ -85,10 +85,10 @@ function draw() {
   
   noStroke();
 
-  if (hour >= 20) {
-    if( int(random(1,30) == partyCount)) {
+  if (hour >= 20 || hour <= 5) {
+    if(partyCount == 9) {
       background(wallColors[index])
-      ceilingColor = wallColors[index]
+      ceilingColor = ceilingFlooorColors[index]
       floorColor = ceilingFlooorColors[index]
     } else {
       background(night.background);
@@ -131,7 +131,7 @@ function draw() {
 
   //directionalLight(242, 0, 249 , 0, -1, -1);
   push();
-  if (hour >= 20) {
+  if (hour >= 20 || hour <= 5) {
     directionalLight(25, 0, 100, 1, 0, -1);
   }
   push();
@@ -203,7 +203,7 @@ function draw() {
   //drawRug();
   
 if (angleY > 1.2) {
-  if (hour >= 20) {
+  if (hour >= 20 || hour <= 5) {
     directionalLight(25, 0, 100, 1, 0, -1);
   }
   drawCalendar();
@@ -409,13 +409,16 @@ function drawWineBottle() {
   function changeColor(){  
     index++; 
      
-     if(index >= colors.length){
+     if(index >= wallColors.length){
       index = 0; 
        
      }
    }
 document.addEventListener('DOMContentLoaded', function () {
-/* select item element */
+
+//Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
+
+//select item element
 const item = document.querySelector('.item');
 
 /*make draggable*/
@@ -439,6 +442,9 @@ boxes.forEach(box => {
     box.addEventListener('dragover', dragOver);
     box.addEventListener('dragleave', dragLeave);
     box.addEventListener('drop', drop);
+
+/*Daily party indicator*/
+runAtSpecificTimeOfDay(6, 0, getPartyCount());
 });
 
 //splash();
@@ -471,8 +477,6 @@ function drop(e) {
     draggable.classList.remove('hide');
 }
 
-  /*Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/ */
-
 function splash() {
   let splashscreen = document.querySelector('.splash');
   splashscreen.addEventListener('click',() => {
@@ -482,4 +486,29 @@ function splash() {
     },610)
   })
 }
+
+/*https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082*/
+
+function runAtSpecificTimeOfDay(hour, minutes, func)
+{
+  const twentyFourHours = 86400000;
+  const now = new Date();
+  let eta_ms = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now;
+  if (eta_ms < 0)
+  {
+    eta_ms += twentyFourHours;
+  }
+  setTimeout(function() {
+    //run once
+    func();
+    // run every 24 hours from now on
+    setInterval(func, twentyFourHours);
+  }, eta_ms);
+}
+
+function getPartyCount() {
+  partyCount = int(random(1,25));
+  console.log(partyCount);
+}
+
 })

@@ -156,7 +156,7 @@ function draw() {
 
   push();
   translate(-10, 55,  -350);
-  fill('brown');
+  fill('#7C3636');
   box(150, 10, 70);
   pop();
   pop();

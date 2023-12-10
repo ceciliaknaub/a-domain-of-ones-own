@@ -38,10 +38,13 @@ main {
 
 h1 {
   font-family: Arial, Helvetica, sans-serif;
-  color:aliceblue;
+  color:black;
   position: absolute;
   margin-left: 1%;
   z-index: 1;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
 }
 
 #b1 {
@@ -78,6 +81,16 @@ h1 {
 
 /*Bookshelf*/
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
 .book-left {
     float: left;
     width: 12%;
@@ -111,4 +124,21 @@ h1 {
            -o-transform: rotate(-6deg) skew(-6deg, 0);
               transform: rotate(-6deg) skew(-6deg, 0);
               z-index: 1;
+  }
+
+  .button-54 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
   }

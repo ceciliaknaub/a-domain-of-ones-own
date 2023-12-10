@@ -14,11 +14,12 @@ let font1;
 let font2;
 let clickCount = 0;
 
-let objects = []
 let books = [];
+let bookmarks = [];
 let test;
 let returnButton;
 let bookmarkButton;
+
 
 class Book {
   constructor (w, h ,x ,y,img,title,author,font,textColor) {
@@ -44,14 +45,17 @@ class Book {
         //return button clears all book text
         returnButton = createButton('Return')
         returnButton.position(w/2,500);
+        returnButton.addClass('button-54');
         returnButton.mousePressed(() => {
           removeElements();
+
           background(roomColor);
           });
                
         //bookmark button creates a shape and saves the text to the array
         bookmarkButton = createButton('Bookmark')
         bookmarkButton.position(w/1.25,500)
+        bookmarkButton.addClass('button-54');
         bookmarkButton.mousePressed(() => {
           fill('yellow');
           rect(w/1.45,100,50,50);
@@ -158,3 +162,4 @@ function bookmarkText(title,author,x,y) {
   vertex(250,75);
   endShape();
 };
+

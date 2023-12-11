@@ -13,12 +13,14 @@ let book2;
 let font1;
 let font2;
 let clickCount = 0;
+let returnCount = 0;
 
 let books = [];
 let bookmarks = [];
 let test;
 let returnButton;
 let bookmarkButton;
+let x = 50;
 
 
 class Book {
@@ -37,9 +39,11 @@ class Book {
     bookClicked() {
       if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
-        //clickCount += 1;
+        clickCount += 1;
+        console.log('return out loop:' + ' ' + returnCount);
+        console.log('book:' + ' ' + clickCount);
         removeElements();
-        background(roomColor);
+        //background(roomColor);
         bookmarkText(this.title,this.author,w/2,50);
 
         //return button clears all book text
@@ -48,9 +52,28 @@ class Book {
         returnButton.addClass('button-54');
         returnButton.mousePressed(() => {
           removeElements();
-
           background(roomColor);
-          });
+           /*clear();
+         if (returnCount > 0) {
+            clear();
+            background(roomColor);
+          }
+          for (i = 50; i < 200; i+=5) {
+              push();
+              stroke('black');
+              beginShape();
+              translate(w/2,50);
+              vertex(i,50);
+              vertex(i,400);
+              vertex(250,385);
+              vertex(450,400);
+              vertex(450,50);
+              vertex(250,75);
+              endShape();
+            pop();
+            //console.log('return loop:' + ' ' + returnCount);
+        }*/
+      });
                
         //bookmark button creates a shape and saves the text to the array
         bookmarkButton = createButton('Bookmark')
@@ -59,7 +82,9 @@ class Book {
         bookmarkButton.mousePressed(() => {
           fill('yellow');
           rect(w/1.45,100,50,50);
+          append(bookmarks,this.title);
                   })
+                  console.log(bookmarks);
       }
     }
 
@@ -96,21 +121,22 @@ function preload(){
 let book;
 
 function setup() {
-  const date = new Date();
-  let hour = date.getHours();
+createCanvas(w,h);
+const date = new Date();
+let hour = date.getHours();
 
-  if (hour >= 20 || hour <= 5) {
-    roomColor = roomBackgroundColors.night;
-  } else if (hour >=17) {
-    roomColor = roomBackgroundColors.evening;
-  } else if (hour >=14){
-    roomColor = roomBackgroundColors.afternoon;
-  }
-  else {
-    roomColor = roomBackgroundColors.morning;
-  }
-  createCanvas(w,h);
-  background(roomColor);
+if (hour >= 20 || hour <= 5) {
+  roomColor = roomBackgroundColors.night;
+} else if (hour >=17) {
+  roomColor = roomBackgroundColors.evening;
+} else if (hour >=14){
+  roomColor = roomBackgroundColors.afternoon;
+}
+else {
+  roomColor = roomBackgroundColors.morning;
+}
+
+background(roomColor);
 
 
   append(books,new Book(50, 400, w/4, h/4 - 25, book1,'To The Lighthouse','Virginia Wolf',font1,255));
@@ -163,3 +189,11 @@ function bookmarkText(title,author,x,y) {
   endShape();
 };
 
+
+document.addEventListener('DOMContentLoaded', function () {
+
+
+
+document.querySelector('.bookshelf-container').style.backgroundColor = roomColor;
+
+});

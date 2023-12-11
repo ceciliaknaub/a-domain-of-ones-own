@@ -127,9 +127,7 @@ function draw() {
   //Window
   drawWindow();
 
-  //Book
-
-  //directionalLight(242, 0, 249 , 0, -1, -1);
+  //Books on bookshelf
   push();
   if (hour >= 20 || hour <= 5) {
     directionalLight(25, 0, 100, 1, 0, -1);
@@ -162,7 +160,6 @@ function draw() {
   pop();
 
 
-
   //Wine bottle
   //push();
  //translate(200,250,200);
@@ -175,7 +172,7 @@ function draw() {
   //drawFrenchPress();
   //pop();
 
-  //Mug
+  //Mugs
   push();
   translate(200,325,100);
   drawMug(255,0,0);
@@ -186,9 +183,10 @@ function draw() {
   drawMug(255,225,0);
   pop();
 
+  //alarm clock
   push();
-  translate(200,325,100);
-  drawMug(255,0,0);
+  translate(-50, 38, -350);
+  clock();
   pop();
 
   //drawHeader();
@@ -277,7 +275,7 @@ function drawRug() {
 
 function drawBook(x,y,z,image){
   texture(image);
-  box(x,y,z,color)
+  box(x,y,z)
 }
 
 function drawCalendar() {
@@ -373,7 +371,7 @@ function drawWineBottle() {
   sphere(10);
   }
 
-  function drawGlass() {
+function drawGlass() {
     directionalLight(242, 247, 249 , 0, -1, -1);
     noStroke();
     
@@ -385,26 +383,7 @@ function drawWineBottle() {
     
     translate(0,12);
     cylinder(10,1);
-  }
-
-  function drawHeader() {
-    //strokeWeight(10);
-    translate(0, 50);
-    beginShape(POINTS);
-    stroke(255);
-    for(let i =0; i< pts.length; i++){
-     vertex(pts[i].x + sin(frameCount*0.05 + pts[i].y*0.1)*5, pts[i].y);
-    }
-    endShape();
-    
-    translate(0, 50);
-    beginShape(POINTS);
-    stroke(255);
-    for(let i =0; i< pts2.length; i++){
-     vertex(pts2[i].x + sin(frameCount*0.05 + pts2[i].y*0.1)*5, pts2[i].y);
-    }
-    endShape();
-  }
+}
 
   function changeColor(){  
     index++; 
@@ -414,6 +393,26 @@ function drawWineBottle() {
        
      }
    }
+
+function clock() {
+  push();
+  fill('black');
+  box(75,25,25);
+  translate(0,0,13);
+  fill("#72A400");
+  textFont(font1);
+  textAlign(CENTER, CENTER);
+  textSize(12);
+  let Hour = hour();
+  let min = minute();
+  let noon = Hour >= 12? " PM" : " AM"
+  if(min < 10) {
+    min = "0"+min
+  }     
+  Hour%=12
+  text(Hour+":"+min+noon,0,0); 
+  pop();
+}
 document.addEventListener('DOMContentLoaded', function () {
 
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
@@ -507,7 +506,9 @@ function runAtSpecificTimeOfDay(hour, minutes, func)
 }
 
 function getPartyCount() {
-  partyCount = int(random(1,25));
+  let min = Math.ceil(1);
+  let max = Math.floor(25);
+  partyCount = Math.floor(Math.random() * (max - min) + min);
   console.log(partyCount);
 }
 

@@ -103,6 +103,20 @@ function draw() {
     floorColor = evening.floor;
     gradientColor1 = evening.gradientColor1
     gradientColor2 = evening.gradientColor2;
+
+    //Draw Wine Bottle and Glasses
+    //Wine Bottle
+    push();
+    translate(200,250,200);
+    drawWineBottle();
+    pop();
+    
+    //glass
+    push();
+    translate(200,260,225);
+    drawGlass();
+    pop();
+
   } else if (hour >=14){
     background(afternoon.background);
     ceilingColor = afternoon.ceiling;
@@ -116,8 +130,19 @@ function draw() {
     floorColor = morning.floor;
     gradientColor1 = morning.gradientColor1
     gradientColor2 = morning.gradientColor2;
-  }
 
+    //Draw Mugs
+    push();
+    translate(200,325,100);
+    drawMug(255,0,0);
+    pop();
+  
+    push();
+    translate(200,325,150);
+    drawMug(255,225,0);
+    pop();  
+
+  }
   // Top face
   drawTopFace(ceilingColor);
 
@@ -159,13 +184,6 @@ function draw() {
   pop();
   pop();
 
-
-  //Wine bottle
-  //push();
- //translate(200,250,200);
-  //drawWineBottle();
-  //pop();
-
   //FrenchPress
   //push();
   //translate(200,250,200);
@@ -173,32 +191,11 @@ function draw() {
   //pop();
 
   //Mugs
-  push();
-  translate(200,325,100);
-  drawMug(255,0,0);
-  pop();
-
-  push();
-  translate(200,325,150);
-  drawMug(255,225,0);
-  pop();
-
   //alarm clock
   push();
   translate(-50, 38, -350);
   clock();
   pop();
-
-  //drawHeader();
-
-  //glass
-  //push();
-  //translate(200,260,225);
-  //drawGlass();
-  //pop();
-
-  //Rug
-  //drawRug();
   
 if (angleY > 1.2) {
   if (hour >= 20 || hour <= 5) {
@@ -246,6 +243,15 @@ function drawWindow() {
   endShape(CLOSE);
   pop();
 }
+
+function changeColor(){  
+  index++; 
+   
+   if(index >= wallColors.length){
+    index = 0; 
+     
+   }
+ }
 
 /*function drawWindowTrim() {
   push();
@@ -313,47 +319,6 @@ function drawMug(r,g,b) {
   pop();
   }
 
-  function drawFrenchPress() {
-    noStroke();
-    push();
-    //directionalLight(255, 255, 255 , 0, -0.5, -1);
-    //cylinder(20, 100);
-    
-    //directionalLight(250, 250, 250, -.845, -.425, -1);
-    cylinder(20,80);
-    pop();
-    
-    //base
-    push();
-    fill('black');
-    translate(0,40);
-    cylinder(20,10);
-    pop();
-    
-    //lid
-    push();
-    fill('black');
-    translate(0,-40);
-    sphere(20);
-    pop();
-    
-    //handle
-    push();
-    fill('black');
-    translate(20,0);
-    torus(15, 5);
-    pop();
-  
-    //plunger
-    push();
-    fill('black');
-    translate(0,-60);
-    sphere(5);
-    pop();
-    
-    
-    }
-
 function drawWineBottle() {
 
   //bottle base
@@ -385,15 +350,6 @@ function drawGlass() {
     cylinder(10,1);
 }
 
-  function changeColor(){  
-    index++; 
-     
-     if(index >= wallColors.length){
-      index = 0; 
-       
-     }
-   }
-
 function clock() {
   push();
   fill('black');
@@ -413,6 +369,8 @@ function clock() {
   text(Hour+":"+min+noon,0,0); 
   pop();
 }
+
+//DOM 
 document.addEventListener('DOMContentLoaded', function () {
 
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/

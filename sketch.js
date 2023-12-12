@@ -82,6 +82,8 @@ function draw() {
   let hour =  date.getHours();
   angleY = map(mouseX, 0, width, -PI, PI);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
+
+  console.log(partyCount);
   
   noStroke();
 
@@ -404,6 +406,7 @@ boxes.forEach(box => {
 runAtSpecificTimeOfDay(6, 0, getPartyCount());
 });
 
+
 //splash();
 
 function dragEnter(e) {
@@ -444,7 +447,8 @@ function splash() {
   })
 }
 
-/*https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082*/
+/*Run a function once each day at set time function from
+https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082*/
 
 function runAtSpecificTimeOfDay(hour, minutes, func)
 {
@@ -467,7 +471,6 @@ function getPartyCount() {
   let min = Math.ceil(1);
   let max = Math.floor(25);
   partyCount = Math.floor(Math.random() * (max - min) + min);
-  console.log(partyCount);
 }
 
 })

@@ -56,21 +56,18 @@ class Book {
       if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
         clickCount += 1;
-        console.log('return out loop:' + ' ' + returnCount);
-        console.log('book:' + ' ' + clickCount);
         removeElements();
-        //background(roomColor);
+        background(roomColor);
 
-        //Find the quotes array length and generate a random quote
+        //Get the quotes array length and generate a random quote for each book
         let arrayLength = this.quotes.length;
-        console.log(arrayLength);
 
         let arrayPos = int(random(0,arrayLength-1));
 
         bookmarkText(this.title, this.author, this.quotes[arrayPos],w/2,50);
 
         //return button clears all book text
-        returnButton = createButton('Return')
+        returnButton = createButton('Return');
         returnButton.position(w/2,500);
         returnButton.addClass('button-54');
         returnButton.mousePressed(() => {
@@ -99,19 +96,30 @@ class Book {
       });
                
         //bookmark button creates a shape and saves the text to the bookmarks array
-        bookmarkButton = createButton('Bookmark')
-        bookmarkButton.position(w/1.25,500)
+        bookmarkButton = createButton('Bookmark');
+        bookmarkButton.position(w/1.25,500);
         bookmarkButton.addClass('button-54');
-        let bookmarkCount = 0;
+
         bookmarkButton.mousePressed(() => {
-          bookmarkCount += 1;
           fill('yellow');
           rect(w/1.45,100,50,50);
           //append(bookmarks,this.title);
-          storeItem('bookmark'+bookmarkCount,this.quotes[arrayPos]);
+          //storeItem('bookmark'+bookmarkCount,this.quotes[arrayPos]);
+          append(bookmarks,this.quotes[arrayPos])
                   })
-                  console.log(this.quotes[arrayPos]);
+                  //console.log(this.quotes[arrayPos]);
       }
+
+      //Remove duplicates from the Bookmarks array
+      let filteredBookmarks = Array.from(new Set(bookmarks));
+      //console.log(filteredBookmarks);
+      //Convert array to string
+      let stringifiedBookmarks = JSON.stringify(filteredBookmarks);
+
+      localStorage.setItem(
+        "bookmarks",
+        stringifiedBookmarks
+      )
     }
 
     drawBook() {
@@ -197,9 +205,13 @@ function mousePressed() {
 function bookmarkText(title,author,quote,x,y) {
 
   //add title and author to the left page
-  let p1 = createElement('p',title + '\n' + author)
-  p1.position(x, y);
-  p1.addClass('book-left');
+  let h2 = createElement('h2', title)
+  h2.position(x, y);
+  h2.addClass('book-left');
+
+  let h3 = createElement('h3',author)
+  h3.position(x, y+100);
+  h3.addClass('book-left');
 
   //add a quote to the right page
   let p2 = createElement('p',quote);

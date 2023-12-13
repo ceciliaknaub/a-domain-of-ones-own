@@ -13,6 +13,30 @@ main {
 
 /*Index*/
 
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.splash {
+  position: absolute;
+  height: 200px;
+  width: 300px;
+  right: 10%;
+  height: 60%;
+  width: 40%;
+  top: 30%;
+  opacity: 0.5;
+  border: solid 2px black;
+  left: 50%;
+  background-color: red;
+  opacity: 0.75;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
 .box {
   height: 150px;
   width: 150px;
@@ -20,6 +44,7 @@ main {
   /*align items*/
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -28,9 +53,6 @@ main {
 }
 
 .item {
-  position: relative;
-  height:75px;
-  width: 75px;
   display: none;
   background-color: #F0DB4F;
 }
@@ -47,7 +69,6 @@ h1 {
   font-size: 24px;
   background-color: white;
   color:black;
-  position: absolute;
   margin-left: 1%;
   z-index: 1;
   border: 3px solid;
@@ -87,6 +108,37 @@ h1 {
   width: 150px;
 }
 
+.bookmark-container {
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.index-bookmark {
+  font-family: "Open Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  background-color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+}
+
+.plant-links {
+  position: absolute;
+  top: 65%;
+  left: 45%;
+  height: 100px;
+  width: 150px;
+
+}
+
 /*Bookshelf*/
 
 a {
@@ -103,7 +155,6 @@ a:visited {
     float: left;
     width: 12%;
     height: 50%;
-    display: inline-block;
       padding-left: 6%;
       padding-top: 4%;
       position: relative;
@@ -150,4 +201,20 @@ a:visited {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+  }
+
+  .back-link {
+    font-family: "Open Sans", sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 24px;
+    background-color: white;
+    color:black;
+    position: absolute;
+    margin-left: 1%;
+    z-index: 1;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;  
   }

@@ -11,8 +11,6 @@ let gradientColor1;
 let gradientColor2;
 let img;
 let book1;
-let pts;
-let pts2;
 let font1;
 let wallColors = ['red','magenta','blue'];
 let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
@@ -63,19 +61,10 @@ function preload(){
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
-  //rectMode(CENTER);
-  pts = font1.textToPoints('A Domain', 0, 0, 50,{
-    sampleFactor: 0.15,
-    simplifyThreshold: 0
-      
-  });
-  
-  pts2 = font1.textToPoints("Of One's Own", 0, 0, 50,{
-    sampleFactor: 0.15,
-    simplifyThreshold: 0
-      
-  });
-  }
+
+  getBookmarks();
+  //rectMode(CENTER);  
+}
 
 function draw() {
   const date = new Date();
@@ -83,7 +72,11 @@ function draw() {
   angleY = map(mouseX, 0, width, -PI, PI);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
 
-  console.log(partyCount);
+//console.log(partyCount);
+
+ //console.log(bookmarks);
+ 
+ //text(b,0,0);
   
   noStroke();
 
@@ -156,6 +149,7 @@ function draw() {
 
   //Books on bookshelf
   push();
+  //Add directional light for night setting
   if (hour >= 20 || hour <= 5) {
     directionalLight(25, 0, 100, 1, 0, -1);
   }
@@ -192,13 +186,23 @@ function draw() {
   //drawFrenchPress();
   //pop();
 
+  //plant
+  push()
+  translate(260,300,-250);
+  drawPlant();
+  pop()
+
   //Mugs
   //alarm clock
   push();
   translate(-50, 38, -350);
-  clock();
+  drawClock();
   pop();
-  
+
+  push();
+  drawLight();
+  pop();
+
 if (angleY > 1.2) {
   if (hour >= 20 || hour <= 5) {
     directionalLight(25, 0, 100, 1, 0, -1);
@@ -206,7 +210,22 @@ if (angleY > 1.2) {
   drawCalendar();
 }
 
+push();
+fill('black')
+textFont(font1);
+pop();
 
+
+//console.log(getItem('bookmarks'));
+
+
+  //add to container 
+//let a = document.querySelector('.p-test').innerHTML = getBookmarks(0);
+//document.querySelector('.bookmark-container').appendChild(a);
+//bm.position(0,h/2);
+//bm.parent('p-test');
+//bm.parent('.bookmark-container');
+//text(JSON.parse(getItem('bookmarks')),0,0)
 }
 
 function drawBottomFace(color) {
@@ -255,31 +274,8 @@ function changeColor(){
    }
  }
 
-/*function drawWindowTrim() {
-  push();
-  beginShape();
-  strokeWeight(2);
-  stroke('black');
-  fill('white');
-  vertex(cubeSize / 2, -cubeSize / 5, -cubeSize / 8); 
-  vertex(cubeSize / 2, -cubeSize / 5, cubeSize / 8);
-  vertex(cubeSize / 2, cubeSize / 5, cubeSize / 8);
-  vertex(cubeSize / 2, cubeSize / 5, -cubeSize / 8);
-  endShape(CLOSE);
-  pop();
-}*/
 
-function drawRug() {
-  push();
-  beginShape();  
-  texture(rug);
-  //rotateZ(-PI/12);
-  rotateX(PI/2);
-  translate(0,0,-cubeSize/2);
-  box(200,300,1);
-  endShape();
-  pop();
-}
+//Draw items added to the room
 
 function drawBook(x,y,z,image){
   texture(image);
@@ -352,7 +348,7 @@ function drawGlass() {
     cylinder(10,1);
 }
 
-function clock() {
+function drawClock() {
   push();
   fill('black');
   box(75,25,25);
@@ -361,16 +357,111 @@ function clock() {
   textFont(font1);
   textAlign(CENTER, CENTER);
   textSize(12);
+
+  //calculate time
   let Hour = hour();
   let min = minute();
   let noon = Hour >= 12? " PM" : " AM"
+
+  //style minute
   if(min < 10) {
     min = "0"+min
-  }     
-  Hour%=12
+  }
+  //convert
+  if (Hour % 12 == 0){
+    Hour = 12
+  } else {
+    Hour%=12
+  }
   text(Hour+":"+min+noon,0,0); 
   pop();
 }
+
+function drawPlant() {
+
+  //plant
+  push()
+  translate(0,-60,0);
+  drawLeaf(15,80,10)
+  pop()
+  
+  push()
+  translate(-25,-60,0);
+  drawLeaf(12,35,10)
+  pop()
+  
+  push()
+  translate(25,-40,0);
+  drawLeaf(10,20,10)
+  pop()
+
+  //pot
+  push();
+  directionalLight(203,75,67, -0.25, 0, -1);
+  cylinder(40,50)
+  
+  push();
+  translate(0,-30,0);
+  cylinder(45,10)
+
+  pop();
+  pop();
+
+  //let div = createElement('div')
+  /*div.position(w/2.15,h/1.5);
+  div.size(100,100);
+  div.addClass('drag-over')
+
+  let a = createA('http://www.google.com','')
+  a.parent(div);*/
+
+}
+
+function drawLeaf(x,y,z) {
+  directionalLight(0,255,0, -0.25, 0, -1);
+  ellipsoid(x,y,z);
+}
+
+function drawLight() {
+  rotate(PI);
+  push()
+  directionalLight(255,0,0, -0.25, 0, -1);
+  noStroke();
+  cone(20,30);
+  
+  translate(0,10)
+  cylinder(5,10);
+  pop();
+
+  push();
+  fill('black');
+  translate(0,25)
+  cylinder(2,80);
+  pop();
+  
+  push()
+  fill('yellow');
+  translate(0,-15)
+  sphere(5)
+  pop()
+  
+}
+
+function getBookmarks() {
+  let bookmarks = getItem('bookmarks');
+  let parsedBookmarks = JSON.parse(bookmarks); 
+  
+  let arrayLength = JSON.parse(getItem('bookmarks')).length
+
+  for (i = 0; i < arrayLength; i++) {
+    let newP = document.createElement('p');
+    //newP.classList.add('.back-link');
+    newP.innerHTML = parsedBookmarks[i];
+    newP.classList.add('index-bookmark');
+    document.querySelector('.bookmark-container').appendChild(newP);  
+  }
+}
+
 
 //DOM 
 document.addEventListener('DOMContentLoaded', function () {
@@ -405,9 +496,6 @@ boxes.forEach(box => {
 /*Daily party indicator*/
 runAtSpecificTimeOfDay(6, 0, getPartyCount());
 });
-
-
-//splash();
 
 function dragEnter(e) {
     e.preventDefault();

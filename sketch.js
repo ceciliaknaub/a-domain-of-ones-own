@@ -62,7 +62,8 @@ function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
 
-  getBookmarks();
+  //getBookmarks()
+
   //rectMode(CENTER);  
 }
 

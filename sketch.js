@@ -61,10 +61,10 @@ function preload(){
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
-
-  //getBookmarks()
-
-  //rectMode(CENTER);  
+  //rectMode(CENTER); 
+  
+  getBookmarks();
+  console.log(getBookmarks());
 }
 
 function draw() {
@@ -72,6 +72,8 @@ function draw() {
   let hour =  date.getHours();
   angleY = map(mouseX, 0, width, -PI, PI);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
+
+
 
 //console.log(partyCount);
 
@@ -454,12 +456,14 @@ function getBookmarks() {
   
   let arrayLength = JSON.parse(getItem('bookmarks')).length
 
-  for (i = 0; i < arrayLength; i++) {
-    let newP = document.createElement('p');
-    //newP.classList.add('.back-link');
-    newP.innerHTML = parsedBookmarks[i];
-    newP.classList.add('index-bookmark');
-    document.querySelector('.bookmark-container').appendChild(newP);  
+  if (arrayLength > 0) {
+    for (i = 0; i < arrayLength; i++) {
+      let newP = document.createElement('p');
+      //newP.classList.add('.back-link');
+      newP.innerHTML = parsedBookmarks[i];
+      newP.classList.add('index-bookmark');
+      document.querySelector('.bookmark-container').appendChild(newP);  
+    }
   }
 }
 

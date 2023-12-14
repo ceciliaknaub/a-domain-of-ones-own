@@ -117,7 +117,7 @@ class Book {
       let stringifiedBookmarks = JSON.stringify(filteredBookmarks);
 
       localStorage.setItem(
-        "bookmarks",
+        "bookmark",
         stringifiedBookmarks
       )
     }

@@ -16,6 +16,7 @@ let wallColors = ['red','magenta','blue'];
 let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
 let index = 0;
 let partyCount;
+let storedBookmarks = JSON.parse(localStorage.getItem("bookmark"));
 
 const morning = {
   background: '#E5E7E9',
@@ -56,15 +57,13 @@ function preload(){
   book3 = loadImage('./assets/didion_cover.png');
   book4 = loadImage('./assets/bell_hooks_cover.png');
   font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
+
+  song = loadSound('./assets/party_song.mp3');
 }
 
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
-  //rectMode(CENTER); 
-  
-  getBookmarks();
-  console.log(getBookmarks());
 }
 
 function draw() {
@@ -73,14 +72,6 @@ function draw() {
   angleY = map(mouseX, 0, width, -PI, PI);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
 
-
-
-//console.log(partyCount);
-
- //console.log(bookmarks);
- 
- //text(b,0,0);
-  
   noStroke();
 
   if (hour >= 20 || hour <= 5) {
@@ -88,6 +79,7 @@ function draw() {
       background(wallColors[index])
       ceilingColor = ceilingFlooorColors[index]
       floorColor = ceilingFlooorColors[index]
+      song.play();
     } else {
       background(night.background);
       ceilingColor = night.ceiling;
@@ -141,6 +133,7 @@ function draw() {
     pop();  
 
   }
+
   // Top face
   drawTopFace(ceilingColor);
 
@@ -217,18 +210,6 @@ push();
 fill('black')
 textFont(font1);
 pop();
-
-
-//console.log(getItem('bookmarks'));
-
-
-  //add to container 
-//let a = document.querySelector('.p-test').innerHTML = getBookmarks(0);
-//document.querySelector('.bookmark-container').appendChild(a);
-//bm.position(0,h/2);
-//bm.parent('p-test');
-//bm.parent('.bookmark-container');
-//text(JSON.parse(getItem('bookmarks')),0,0)
 }
 
 function drawBottomFace(color) {
@@ -450,12 +431,7 @@ function drawLight() {
   
 }
 
-function getBookmarks() {
-  let bookmarks = getItem('bookmarks');
-  let parsedBookmarks = JSON.parse(bookmarks); 
-  
-  let arrayLength = JSON.parse(getItem('bookmarks')).length
-
+/*function getBookmarks() {
   if (arrayLength > 0) {
     for (i = 0; i < arrayLength; i++) {
       let newP = document.createElement('p');
@@ -465,13 +441,14 @@ function getBookmarks() {
       document.querySelector('.bookmark-container').appendChild(newP);  
     }
   }
-}
+}*/
 
 
 //DOM 
 document.addEventListener('DOMContentLoaded', function () {
-
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
+
+window.addEventListener("load", getBookmarks(storedBookmarks));
 
 //select item element
 const item = document.querySelector('.item');
@@ -565,5 +542,15 @@ function getPartyCount() {
   let max = Math.floor(25);
   partyCount = Math.floor(Math.random() * (max - min) + min);
 }
+
+function getBookmarks(array) {
+  for (i=0; i<array.length;i++){
+    let p = document.createElement('p');
+    //p.setAttribute("id",'p');
+    p.innerHTML = array[i];
+    p.classList.add('index-bookmark');
+    document.querySelector('.bookmark-container').appendChild(p);
+  }
+};
 
 })

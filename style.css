@@ -219,3 +219,15 @@ a:visited {
     padding: 0.25em 0.5em;
     box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;  
   }
+
+  /*Plant.html*/
+  .button-container {
+    position: absolute;
+    height: 100%;
+    width: 33%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1%;  
+  }

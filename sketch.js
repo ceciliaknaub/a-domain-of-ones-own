@@ -16,6 +16,7 @@ let wallColors = ['red','magenta','blue'];
 let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
 let index = 0;
 let partyCount;
+let sessionBookmarks = JSON.parse(localStorage.getItem("bookmark"));
 
 const morning = {
   background: '#E5E7E9',
@@ -62,9 +63,13 @@ function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
   //rectMode(CENTER); 
-  
-  getBookmarks();
-  console.log(getBookmarks());
+
+  for (i = 1; i < sessionBookmarks.length; i++) {
+    let newP = document.createElement('p');
+    //newP.classList.add('.back-link');
+    newP.innerHTML = sessionBookmarks[i];
+    newP.classList.add('index-bookmark');
+    document.querySelector('.bookmark-container').appendChild(newP); }
 }
 
 function draw() {
@@ -74,7 +79,9 @@ function draw() {
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
 
 
+push()
 
+pop();
 //console.log(partyCount);
 
  //console.log(bookmarks);
@@ -220,15 +227,6 @@ pop();
 
 
 //console.log(getItem('bookmarks'));
-
-
-  //add to container 
-//let a = document.querySelector('.p-test').innerHTML = getBookmarks(0);
-//document.querySelector('.bookmark-container').appendChild(a);
-//bm.position(0,h/2);
-//bm.parent('p-test');
-//bm.parent('.bookmark-container');
-//text(JSON.parse(getItem('bookmarks')),0,0)
 }
 
 function drawBottomFace(color) {
@@ -450,7 +448,7 @@ function drawLight() {
   
 }
 
-function getBookmarks() {
+/*function getBookmarks() {
   let bookmarks = getItem('bookmarks');
   let parsedBookmarks = JSON.parse(bookmarks); 
   
@@ -465,7 +463,7 @@ function getBookmarks() {
       document.querySelector('.bookmark-container').appendChild(newP);  
     }
   }
-}
+}*/
 
 
 //DOM 
@@ -565,5 +563,9 @@ function getPartyCount() {
   let max = Math.floor(25);
   partyCount = Math.floor(Math.random() * (max - min) + min);
 }
+
+window.addEventListener("load", (event) => {
+  localStorage.setItem("bookmark", JSON.stringify('a'));
+});
 
 })

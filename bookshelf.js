@@ -14,9 +14,9 @@ let font1;
 let font2;
 let clickCount = 0;
 let returnCount = 0;
-
 let books = [];
-let bookmarks = [];
+
+
 let quotes = {
   woolf: ["About here, she thought, dabbling her fingers in the water, a ship had sunk, and she muttered, dreamily half asleep, how we perished, each alone.",
   "Beauty was not everything. Beauty had this penalty — it came too readily, came too completely. It stilled life — froze it.",
@@ -37,6 +37,7 @@ let returnButton;
 let bookmarkButton;
 let x = 50;
 
+let bookmarks = [];
 
 class Book {
   constructor (w, h ,x ,y,img,title,author,font,textColor,quotes) {
@@ -61,7 +62,6 @@ class Book {
 
         //Get the quotes array length and generate a random quote for each book
         let arrayLength = this.quotes.length;
-
         let arrayPos = int(random(0,arrayLength-1));
 
         bookmarkText(this.title, this.author, this.quotes[arrayPos],w/2,50);
@@ -103,25 +103,11 @@ class Book {
         bookmarkButton.mousePressed(() => {
           fill('yellow');
           rect(w/1.45,100,50,50);
-          //append(bookmarks,this.title);
-          //storeItem('bookmark'+bookmarkCount,this.quotes[arrayPos]);
-          append(bookmarks,this.quotes[arrayPos])
-                  })
-                  //console.log(this.quotes[arrayPos]);
+          //add unique quotes to the bookmark array when bookmark button is pressed
+          createBookmark(this.quotes[arrayPos]);
+          })
       }
-
-      //Remove duplicates from the Bookmarks array
-      let filteredBookmarks = Array.from(new Set(bookmarks));
-      //console.log(filteredBookmarks);
-      //Convert array to string
-      let stringifiedBookmarks = JSON.stringify(filteredBookmarks);
-
-      localStorage.setItem(
-        "bookmarks",
-        stringifiedBookmarks
-      )
     }
-
     drawBook() {
       push();
         image(this.img,this.x,this.y);
@@ -138,7 +124,6 @@ class Book {
         text(this.author,-150, 5);
     pop();
     }
-
 }
 function preload(){
   //images
@@ -185,7 +170,6 @@ background(roomColor);
 }
 
 function draw(){
-
   noStroke();
 
   //draw books 
@@ -218,7 +202,6 @@ function bookmarkText(title,author,quote,x,y) {
   p2.position(x + 250, y);
   p2.addClass('book-right');
 
-
   //Draw the white book page
   beginShape();
   translate(x,y);
@@ -231,3 +214,11 @@ function bookmarkText(title,author,quote,x,y) {
   vertex(250,75);
   endShape();
 };
+
+function createBookmark(x) {
+  if(!bookmarks.includes(x)){
+    append(bookmarks,x)
+    console.log("added to bookmarks");
+  }
+  localStorage.setItem("bookmark", JSON.stringify(bookmarks));
+}

@@ -18,7 +18,6 @@ let font1;
 let wallColors = ['red','magenta','blue'];
 let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
 let index = 0;
-let partyCount;
 
 const morning = {
   background: '#E5E7E9',
@@ -67,8 +66,8 @@ function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
 
+  runOncePerDay(); // run the code
   //splash();
-
 }
 
 function draw() {
@@ -76,11 +75,10 @@ function draw() {
   let hour =  date.getHours();
   angleY = map(mouseX, 0, width, -PI, PI);
   rotateY(constrain(angleY,PI/4,3*(PI/4)));
-
   noStroke();
 
   if (hour >= 20 || hour <= 5) {
-    if(partyCount == 9) {
+    if(localStorage.getItem('partyCount') == 9) {
       background(wallColors[index])
       ceilingColor = ceilingFlooorColors[index]
       floorColor = ceilingFlooorColors[index]
@@ -431,33 +429,25 @@ function splash() {
   })
 }
 
-//DOM 
-document.addEventListener('DOMContentLoaded', function () {
-//Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
+// checks if one day has passed. 
+function hasOneDayPassed() {
+  // get today's date. eg: "7/37/2007"
+  var date = new Date().toLocaleDateString();
 
-/*Run a function once each day at set time function from
-https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082*/
+  // if there's a date in localstorage and it's equal to the above: 
+  // inferring a day has yet to pass since both dates are equal.
+  if( localStorage.yourapp_date == date ) 
+      return false;
 
-function runAtSpecificTimeOfDay(hour, minutes, func)
-{
-  const twentyFourHours = 86400000;
-  const now = new Date();
-  let eta_ms = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 0, 0).getTime() - now;
-  if (eta_ms < 0)
-  {
-    eta_ms += twentyFourHours;
-  }
-  setTimeout(function() {
-    //run once
-    func();
-    // run every 24 hours from now on
-    setInterval(func, twentyFourHours);
-  }, eta_ms);
+  // this portion of logic occurs when a day has passed
+  localStorage.yourapp_date = date;
+  return true;
 }
-function getPartyCount() {
-  let min = Math.ceil(1);
-  let max = Math.floor(25);
-  partyCount = Math.floor(Math.random() * (max - min) + min);
-}
+// some function which should run once a day
+function runOncePerDay(){
+  if( !hasOneDayPassed() ) return false;
 
-})
+  // your code below
+  localStorage.partyCount = int(random(1,10));
+  splash();
+}

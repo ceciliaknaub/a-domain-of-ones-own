@@ -10,7 +10,6 @@ let roomBackgroundColors = {
 let roomColor;
 
 let waterButton;
-let feedButton;
 let touchButton;
 
 function setup(){
@@ -20,8 +19,8 @@ let hour = date.getHours();
 
 createCanvas(w,h,WEBGL);
 
+//touch button text, visible when button is pressed
 let p = document.createElement('p');
-//p.setAttribute("id",'p');
 p.innerHTML = 'Now, why would you touch a cactus?';
 p.classList.add('left-text');
 document.querySelector('.text-container').appendChild(p);
@@ -64,14 +63,11 @@ touchButton.mousePressed(() => {
 }
 
 function draw(){
-  noStroke();
+noStroke();
 
 //draw plant
 translate(0,100);
 drawPlant();
-
-
-
 }
 
 function drawPlant() {
@@ -103,10 +99,6 @@ function drawPlant() {
   
     pop();
     pop();  
-  }
-
-  function preload(){
-
   }
   
   function drawLeaf(x,y,z) {

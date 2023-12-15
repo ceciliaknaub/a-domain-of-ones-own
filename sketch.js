@@ -58,15 +58,16 @@ function preload(){
   book3 = loadImage('./assets/didion_cover.png');
   book4 = loadImage('./assets/bell_hooks_cover.png');
   font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
-
-  //song = loadSound('./assets/party_song.mp3');
 }
 
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
 
-  runOncePerDay(); // run the code
+  //sets party count for each day
+  runOncePerDay();
+
+  //handles null session storage or shows saved bookmark and calendar event
   if (sessionStorage.bookmark == null){
     getBookmarks('Bookmark');
 } else {
@@ -206,6 +207,7 @@ function draw() {
   drawLight();
   pop();
 
+//only draws calendar at certain angles to prevent it from blocking the view
 if (angleY > 1.2) {
   if (hour >= 20 || hour <= 5) {
     directionalLight(25, 0, 100, 1, 0, -1);
@@ -256,6 +258,7 @@ function drawWindow() {
   pop();
 }
 
+//changes colors for party mode
 function changeColor(){  
   index++; 
    
@@ -445,16 +448,6 @@ function getCalendarEvent(text) {
   document.querySelector('.text-container').appendChild(p);
   p.style.backgroundColor = "pink";
 };
-
-/*function splash() {
-  let splashscreen = document.querySelector('.splash');
-  splashscreen.addEventListener('click',() => {
-    splashscreen.style.opacity=0;
-    setTimeout(()=>{
-      splashScreen.classList.add('hide')
-    },610)
-  })
-}*/
 
 /*https://stackoverflow.com/questions/11741979/run-code-once-a-day*/
 // checks if one day has passed. 

@@ -35,12 +35,13 @@ else {
 }
 background(roomColor);
 
+//create input box
 let inp = createInput('');
 let inpDiv = document.createElement('div');
 inp.parent(inpDiv);
 
+//style and format it
 inpDiv.classList.add('left-text');
-
 document.querySelector('.text-container').appendChild(inpDiv);
 
 inp.input(() => {
@@ -54,21 +55,12 @@ scheduleButton.addClass('button-54');
 scheduleButton.position(w/2.15,h/1.25);
 
 scheduleButton.mousePressed(() => {
-  background(roomCo);
   fill('pink');
   noStroke();
   rect(w/2,h/1.25 - 50,50,50);
-  image(calendar,w/3,h/4,500,350);
 })
-//scheduleButton = createA('https://calendar.google.com/calendar/u/1?cid=YS5kb21haW4ub2Yub25lcy5vd24ucHJvamVjdEBnbWFpbC5jb20','Schedule');
-//scheduleButton.addClass('button-54');
-//scheduleButton.position(w/2.15,h/1.25);
 }
 
 function draw() {
-  translate(0,0,-10)
   image(calendar,w/3,h/4,500,350);
 };
-
-/*fill('yellow');
-rect(w/1.45,100,50,50);*/

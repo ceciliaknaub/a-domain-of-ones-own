@@ -178,11 +178,11 @@ function mousePressed() {
 function bookmarkText(title,author,quote,x,y) {
 
   //add title and author to the left page
-  let h2 = createElement('h2', title)
+  let h2 = createElement('h3', title)
   h2.position(x, y);
   h2.addClass('book-left');
 
-  let h3 = createElement('h3',author)
+  let h3 = createElement('p',author)
   h3.position(x, y+75);
   h3.addClass('book-left');
 
@@ -204,9 +204,3 @@ function bookmarkText(title,author,quote,x,y) {
   vertex(250,75);
   endShape();
 };
-
-function lastPage(quote,x,y) {
-  let p2 = createElement('p',quote);
-  p2.position(x + 250, y);
-  p2.addClass('book-right');
-}

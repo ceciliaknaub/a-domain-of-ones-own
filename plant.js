@@ -40,17 +40,9 @@ else {
 }
 background(roomColor);
 
-let btnCont = createElement('div');
-
 waterButton = createButton('Water');
 feedButton = createButton('Feed');
 touchButton = createButton('Touch');
-returnButton = createButton('Return');
-
-waterButton.parent(btnCont);
-feedButton.parent(btnCont);
-touchButton.parent(btnCont);
-returnButton.parent(btnCont);
 
 waterButton.addClass('button-54');
 feedButton.addClass('button-54');
@@ -66,7 +58,6 @@ waterButton.mousePressed(() => {
   translate(-300,-100);
     drawWateringCan(p);
 });
-
 
 feedButton.mousePressed(() => {
   background(roomColor);
@@ -177,11 +168,5 @@ function drawPlant() {
   
     rotate(PI/3);
     cylinder(25,180,10);
-    /*let p = document.createElement('p');
-    //p.setAttribute("id",'p');
-    p.innerHTML = 'Now, why would you touch a cactus?';
-    p.classList.add('left-text');
-    document.querySelector('.text-container').appendChild(p);
-    p.style.display = 'none';*/
     p.style.display = 'flex';
   }

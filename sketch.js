@@ -68,14 +68,16 @@ function setup() {
 
   runOncePerDay(); // run the code
 
-  if (sessionStorage.bookmark == null) {
+  /*if (sessionStorage.bookmark == null) {
     let p = document.createElement('p');
     //p.setAttribute("id",'p');
     p.innerHTML = sessionStorage.bookmark;
     p.classList.add('.hide');
   } else {
     getBookmarks(sessionStorage.bookmark);
-  }
+    getCalendar(sessionStorage.calendar);
+
+  }*/
 }
 
 function draw() {
@@ -433,6 +435,7 @@ function getBookmarks(text) {
     p.innerHTML = text;
     p.classList.add('left-text');
     document.querySelector('.text-container').appendChild(p);
+    p.style.backgroundColor = "yellow";
 };
 
 /*https://stackoverflow.com/questions/11741979/run-code-once-a-day*/

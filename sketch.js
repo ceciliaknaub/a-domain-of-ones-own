@@ -431,12 +431,6 @@ function drawLight() {
   pop()  
 }
 
-function ticker(message) {
-  text(message, x, y);
-  x -= 2;
-  if (x < 0 - textWidth(message)) x = width;
-}
-
 //DOM 
 document.addEventListener('DOMContentLoaded', function () {
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/

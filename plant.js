@@ -47,20 +47,22 @@ let btnCont = createElement('div');
 waterButton = createButton('Water');
 feedButton = createButton('Feed');
 touchButton = createButton('Touch');
-returnButton = createButton('Return Item');
+returnButton = createButton('Return');
 
 waterButton.parent(btnCont);
 feedButton.parent(btnCont);
 touchButton.parent(btnCont);
+returnButton.parent(btnCont);
 
 waterButton.addClass('button-54');
 feedButton.addClass('button-54');
 touchButton.addClass('button-54');
+returnButton.addClass('button-54');
 
 waterButton.position(w/2.75,h/1.15);
 feedButton.position(w/2.1,h/1.15);
 touchButton.position(w/1.75,h/1.15);
-
+returnButton.position(w/1.25,h/1.15);
 
 waterButton.mousePressed(() => {
   translate(-300,-200);
@@ -74,9 +76,14 @@ feedButton.mousePressed(() => {
 });
 
 touchButton.mousePressed(() => {
-  translate(100,-300);
+  translate(100,-300,-50);
     drawTouch();
 });
+
+returnButton.mousePressed(() => {
+  background(roomColor);
+});
+
 
 }
 

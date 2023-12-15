@@ -33,19 +33,20 @@ if (hour >= 20 || hour <= 5) {
 else {
   roomColor = roomBackgroundColors.morning;
 }
-background(roomColor);
 
 //create input box
-let inp = createInput('');
+let inp = createInput('Type here');
 let inpDiv = document.createElement('div');
 inp.parent(inpDiv);
+background(roomColor);
 
 //style and format it
 inpDiv.classList.add('left-text');
 document.querySelector('.text-container').appendChild(inpDiv);
 
+image(calendar,w/3,h/4,500,350);
+
 inp.input(() => {
-  background(200);
   userInput = inp.value();
   sessionStorage.calendarEvent = userInput;
 });
@@ -57,10 +58,9 @@ scheduleButton.position(w/2.15,h/1.25);
 scheduleButton.mousePressed(() => {
   fill('pink');
   noStroke();
-  rect(w/2,h/1.25 - 50,50,50);
+  rect(w/2,h/1.9 - 50,50,50);
 })
 }
 
 function draw() {
-  image(calendar,w/3,h/4,500,350);
 };

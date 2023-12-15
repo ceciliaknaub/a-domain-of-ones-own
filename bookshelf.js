@@ -16,15 +16,13 @@ let clickCount = 0;
 let returnCount = 0;
 
 let books = [];
-let bookmarks = [];
 let quotes = {
   woolf: ["About here, she thought, dabbling her fingers in the water, a ship had sunk, and she muttered, dreamily half asleep, how we perished, each alone.",
   "Beauty was not everything. Beauty had this penalty — it came too readily, came too completely. It stilled life — froze it.",
   "She felt... how life, from being made up of little separate incidents which one lived one by one, became curled and whole like a wave which bore one up with it and threw one down with it, there, with a dash on the beach.",
   "But nevertheless, the fact remained, it was almost impossible to dislike anyone if one looked at them."],
   knight: ["Have faith in yourself, but also have faith in faith. Not faith as others define it. Faith as you define it. Faith as faith defines itself in your heart."],
-  didion: ["We are imperfect mortal beings, aware of that mortality even as we push it away, failed by our very complication, so wired that when we mourn our losses we also mourn, for better or for worse, ourselves. As we were. As we are no longer. As we will one day not be at all.",
-"Grief is different. Grief has no distance. Grief comes in waves, paroxysms, sudden apprehensions that weaken the knees and blind the eyes and obliterate the dailiness of life."],
+  didion: ["We are imperfect mortal beings, aware of that mortality even as we push it away, failed by our very complication, so wired that when we mourn our losses we also mourn, for better or for worse, ourselves. As we were. As we are no longer. As we will one day not be at all.", "Grief is different. Grief has no distance. Grief comes in waves, paroxysms, sudden apprehensions that weaken the knees and blind the eyes and obliterate the dailiness of life."],
 hooks: ["But many of us seek community solely to escape the fear of being alone. Knowing how to be solitary is central to the art of loving. When we can be alone, we can be with others without using them as a means of escape.",
 "Individuals who want to believe that there is no fulfillment in love, that true love does not exist, cling to these assumptions because this despair is actually easier to face than the reality that love is a real fact of life but is absent from their lives.",
 "To love well is the task in all meaningful relationships, not just romantic bonds.",
@@ -36,7 +34,6 @@ let test;
 let returnButton;
 let bookmarkButton;
 let x = 50;
-let storedBookmarks = JSON.parse(localStorage.getItem("bookmark"));
 
 class Book {
   constructor (w, h ,x ,y,img,title,author,font,textColor,quotes) {
@@ -68,7 +65,7 @@ class Book {
         //Get the quotes array length and generate a random quote for each book
         let arrayLength = this.quotes.length;
 
-        let arrayPos = int(random(0,arrayLength-1));
+        let arrayPos = int(random(0,arrayLength));
 
         bookmarkText(this.title, this.author, this.quotes[arrayPos],w/2,50);
 
@@ -79,20 +76,6 @@ class Book {
         returnButton.mousePressed(() => {
           removeElements();
           background(roomColor);
-          /*for (i = 50; i < 250; i+=5) {
-              push();
-              stroke('black');
-              beginShape();
-              translate(w/2,50);
-              vertex(i,50);
-              vertex(i,400);
-              vertex(250,385);
-              vertex(450,400);
-              vertex(450,50);
-              vertex(250,75);
-              endShape();
-            pop();}
-            //console.log('return loop:' + ' ' + returnCount);*/
       });
                
         //bookmark button creates a shape and saves the text to the bookmarks array
@@ -103,23 +86,12 @@ class Book {
         bookmarkButton.mousePressed(() => {
           fill('yellow');
           rect(w/1.45,100,50,50);
-          //append(bookmarks,this.title);
-          //storeItem('bookmark'+bookmarkCount,this.quotes[arrayPos]);
-          append(bookmarks,this.quotes[arrayPos])
-                  })
-                  //console.log(this.quotes[arrayPos]);
+          localStorage.setItem(
+            "bookmark",
+            this.quotes[arrayPos]
+          )
+        })
       }
-
-      //Remove duplicates from the Bookmarks array
-      let filteredBookmarks = Array.from(new Set(bookmarks));
-      //console.log(filteredBookmarks);
-      //Convert array to string
-      let stringifiedBookmarks = JSON.stringify(filteredBookmarks);
-
-      localStorage.setItem(
-        "bookmark",
-        stringifiedBookmarks
-      )
     }
 
     drawBook() {
@@ -179,7 +151,7 @@ background(roomColor);
 
   append(books,new Book(50, 400, w/4, h/4 - 25, book1,'To The Lighthouse','Virginia Woolf',font1,255,quotes.woolf));
   append(books, new Book(70,450,w/4 + 50, h/4 - 75, book2,'SHOE DOG','Phil Knight',font2,'#A9672A',quotes.knight));
-  append(books, new Book(45,375, w/4 + 120, h/4,book3,'The Year of Magical Thinking','Joan Didion',font1,'black',quotes.didion));
+  append(books, new Book(45,400, w/4 + 120, h/4,book3,'The Year of Magical Thinking','Joan Didion',font1,'black',quotes.didion));
   append(books, new Book(45,375, w/4 + 160, h/4,book4,'all about love','bell hooks',font1,'black',quotes.hooks));
 }
 
@@ -238,13 +210,3 @@ function lastPage(quote,x,y) {
   p2.position(x + 250, y);
   p2.addClass('book-right');
 }
-
-function getBookmarks(array) {
-  for (i=0; i<array.length;i++){
-    let p = document.createElement('p');
-    //p.setAttribute("id",'p');
-    p.innerHTML = array[i];
-    p.classList.add('index-bookmark');
-    document.querySelector('.text-container').appendChild(p);
-  }
-};

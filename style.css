@@ -23,8 +23,8 @@ main {
   position : fixed;
   top : 50%;
   left : 50%;
-  height : 95%;
-  width : 95%;
+  height : 50%;
+  width : 50%;
   opacity: 0.75;
   transform : translate(-50%,-50%);    
   background-color: rgba(0,0,0);
@@ -208,6 +208,16 @@ a:visited {
     padding: 0.25em 0.5em;
     box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
     width: min-content;
+  }
+
+  .bs-text-container {
+    position: absolute;
+    height: 100%;
+    width: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 1%;
   }
 
   /*Plant.html*/

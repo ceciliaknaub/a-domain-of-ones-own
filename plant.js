@@ -13,16 +13,19 @@ let waterButton;
 let feedButton;
 let touchButton;
 
-let wateringCan;
-let platnFeed;
-let no;
-
 function setup(){
 //get the date to know the time of day, in hours
 const date = new Date();
 let hour = date.getHours();
 
 createCanvas(w,h,WEBGL);
+
+let p = document.createElement('p');
+//p.setAttribute("id",'p');
+p.innerHTML = 'Now, why would you touch a cactus?';
+p.classList.add('left-text');
+document.querySelector('.text-container').appendChild(p);
+p.style.display = 'none';
 
 //sets the background room color based on time of day
 if (hour >= 20 || hour <= 5) {
@@ -52,42 +55,41 @@ returnButton.parent(btnCont);
 waterButton.addClass('button-54');
 feedButton.addClass('button-54');
 touchButton.addClass('button-54');
-returnButton.addClass('button-54');
 
 waterButton.position(w/2.75,h/1.15);
 feedButton.position(w/2.1,h/1.15);
 touchButton.position(w/1.75,h/1.15);
-returnButton.position(w/1.25,h/1.15);
 
 waterButton.mousePressed(() => {
-  translate(-300,-200);
-    drawWateringCan();
+  p.style.display = 'none';
+  background(roomColor);
+  translate(-300,-100);
+    drawWateringCan(p);
 });
 
 
 feedButton.mousePressed(() => {
-  translate(100,-300);
-    drawPlantFeed();
+  background(roomColor);
+  translate(-300,-100);
+    drawPlantFeed(p);
 });
 
 touchButton.mousePressed(() => {
-  translate(100,-300,-50);
-    drawTouch();
-});
-
-returnButton.mousePressed(() => {
   background(roomColor);
+  translate(-300,-100);
+    drawTouch(p);
 });
-
 
 }
 
 function draw(){
+  noStroke();
 
 //draw plant
-noStroke();
-translate(0,100,0);
+translate(0,100);
 drawPlant();
+
+
 
 }
 
@@ -121,16 +123,21 @@ function drawPlant() {
     pop();
     pop();  
   }
+
+  function preload(){
+
+  }
   
   function drawLeaf(x,y,z) {
     directionalLight(0,255,0, -0.25, 0, -1);
     ellipsoid(x,y,z);
   }
 
-  function drawWateringCan() {
+  function drawWateringCan(p) {
+    p.style.display = 'none';
+
     directionalLight(0, 150, 150, 0,0,-0.5);
-    
-    noStroke();
+        noStroke();
     cylinder(50,200,40);
     
     push();
@@ -158,15 +165,23 @@ function drawPlant() {
   
   }
 
-  function drawPlantFeed(){
+  function drawPlantFeed(p){
     fill('yellow');
     rect(50,100,100);
+    p.style.display = 'none';
   }
 
-  function drawTouch() {
+  function drawTouch(p) {
     directionalLight(255, 0, 0, 0,0,-0.5);
     torus(100,25,50);
   
     rotate(PI/3);
     cylinder(25,180,10);
+    /*let p = document.createElement('p');
+    //p.setAttribute("id",'p');
+    p.innerHTML = 'Now, why would you touch a cactus?';
+    p.classList.add('left-text');
+    document.querySelector('.text-container').appendChild(p);
+    p.style.display = 'none';*/
+    p.style.display = 'flex';
   }

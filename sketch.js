@@ -67,7 +67,13 @@ function setup() {
   setInterval(changeColor, 750);
 
   runOncePerDay(); // run the code
-  //splash();
+
+  /*let p = document.createElement('p');
+  //p.setAttribute("id",'p');
+  p.innerHTML = JSON.parse(localStorage.bookmark);
+  p.classList.add('left-text');
+  document.querySelector('.text-container').appendChild(p);*/
+  getBookmarks(localStorage.bookmark);
 }
 
 function draw() {
@@ -78,7 +84,7 @@ function draw() {
   noStroke();
 
   if (hour >= 20 || hour <= 5) {
-    if(localStorage.getItem('partyCount') == 9) {
+    if(localStorage.getItem('partyCount') == 3) {
       background(wallColors[index])
       ceilingColor = ceilingFlooorColors[index]
       floorColor = ceilingFlooorColors[index]
@@ -419,7 +425,15 @@ function drawLight() {
   pop()  
 }
 
-function splash() {
+function getBookmarks(text) {
+    let p = document.createElement('p');
+    //p.setAttribute("id",'p');
+    p.innerHTML = text;
+    p.classList.add('left-text');
+    document.querySelector('.text-container').appendChild(p);
+};
+
+/*function splash() {
   let splashscreen = document.querySelector('.splash');
   splashscreen.addEventListener('click',() => {
     splashscreen.style.opacity=0;
@@ -427,8 +441,9 @@ function splash() {
       splashScreen.classList.add('hide')
     },610)
   })
-}
+}*/
 
+/*https://stackoverflow.com/questions/11741979/run-code-once-a-day*/
 // checks if one day has passed. 
 function hasOneDayPassed() {
   // get today's date. eg: "7/37/2007"
@@ -449,5 +464,5 @@ function runOncePerDay(){
 
   // your code below
   localStorage.partyCount = int(random(1,10));
-  splash();
+  localStorage.bookmark = null;
 }

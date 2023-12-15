@@ -52,10 +52,16 @@ class Book {
       this.quotes = quotes
     }
 
+    hover() {
+      if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
+	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
+        cursor(HAND);
+      }
+    }
+
     bookClicked() {
       if ((mouseX > this.x) && (mouseX < this.x+this.w) &&
 	    (mouseY > this.y) && (mouseY < this.y+this.h)) {
-        clickCount += 1;
         removeElements();
         background(roomColor);
 
@@ -156,6 +162,10 @@ let book;
 
 function setup() {
 createCanvas(w,h);
+let p = document.createElement('p');
+p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
+p.classList.add('index-bookmark');
+document.querySelector('.text-container').appendChild(p);
 
 //get the date to know the time of day, in hours
 const date = new Date();
@@ -181,7 +191,6 @@ background(roomColor);
   append(books, new Book(70,450,w/4 + 50, h/4 - 75, book2,'SHOE DOG','Phil Knight',font2,'#A9672A',quotes.knight));
   append(books, new Book(45,375, w/4 + 120, h/4,book3,'The Year of Magical Thinking','Joan Didion',font1,'black',quotes.didion));
   append(books, new Book(45,375, w/4 + 160, h/4,book4,'all about love','bell hooks',font1,'black',quotes.hooks));
-
 }
 
 function draw(){
@@ -191,9 +200,11 @@ function draw(){
   //draw books 
   for (i = 0; i < books.length; i++) {
     book = books[i];
+    book.hover();
     book.drawBook();
   }
 }
+
 
 function mousePressed() {
     for (i = 0; i < books.length; i++) {

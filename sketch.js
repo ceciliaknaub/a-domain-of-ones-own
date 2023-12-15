@@ -68,10 +68,10 @@ function preload(){
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
-  //let p = document.createElement('p');
-  //p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
-  //p.classList.add('index-bookmark');
-  //document.querySelector('.bookmark-container').appendChild(p);
+  let p = document.createElement('p');
+  p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
+  p.classList.add('index-bookmark');
+  document.querySelector('.text-container').appendChild(p);
 
 }
 
@@ -437,24 +437,10 @@ function ticker(message) {
   if (x < 0 - textWidth(message)) x = width;
 }
 
-/*function getBookmarks() {
-  if (arrayLength > 0) {
-    for (i = 0; i < arrayLength; i++) {
-      let newP = document.createElement('p');
-      //newP.classList.add('.back-link');
-      newP.innerHTML = parsedBookmarks[i];
-      newP.classList.add('index-bookmark');
-      document.querySelector('.bookmark-container').appendChild(newP);  
-    }
-  }
-}*/
-
-
 //DOM 
 document.addEventListener('DOMContentLoaded', function () {
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
 getBookmarks(storedBookmarks);
-
 
 //select item element
 const item = document.querySelector('.item');
@@ -555,7 +541,7 @@ function getBookmarks(array) {
     //p.setAttribute("id",'p');
     p.innerHTML = array[i];
     p.classList.add('index-bookmark');
-    document.querySelector('.bookmark-container').appendChild(p);
+    document.querySelector('.text-container').appendChild(p);
   }
 };
 

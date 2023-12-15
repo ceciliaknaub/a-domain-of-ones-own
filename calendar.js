@@ -38,6 +38,12 @@ scheduleButton = createA('https://calendar.google.com/calendar/u/1?cid=YS5kb21ha
 scheduleButton.addClass('button-54');
 scheduleButton.position(w/2.15,h/1.25);
 
+let p = document.createElement('p');
+p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
+//p.classList.add('index-bookmark');
+document.querySelector('.text-container').appendChild(p);
+
+
 scheduleButton.mousePressed(() => {
 
 });

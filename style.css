@@ -34,7 +34,7 @@ main {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 2
 }
 
 .box {
@@ -108,7 +108,7 @@ h1 {
   width: 150px;
 }
 
-.bookmark-container {
+.text-container {
   position: absolute;
   height: 100%;
   width: 30%;

@@ -18,46 +18,21 @@ main {
   height: 100%;
 }
 
-.splash {
-  position: absolute;
-  height: 200px;
-  width: 300px;
-  right: 10%;
-  height: 60%;
-  width: 40%;
-  top: 30%;
-  opacity: 0.5;
-  border: solid 2px black;
-  left: 50%;
-  background-color: red;
+.splash{
+  cursor : pointer;
+  position : fixed;
+  top : 50%;
+  left : 50%;
+  height : 95%;
+  width : 95%;
   opacity: 0.75;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 2
-}
-
-.box {
-  height: 150px;
-  width: 150px;
-
-  /*align items*/
+  transform : translate(-50%,-50%);    
+  background-color: rgba(0,0,0);
+  transition : all ease-in-out 600ms;
+  color: white;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
-.drag-over {
-  border: dashed 3px red;
-}
-
-.item {
-  display: none;
-  background-color: #F0DB4F;
-}
-
-.hide {
   display: none;
 }
 
@@ -69,11 +44,25 @@ h1 {
   font-size: 24px;
   background-color: white;
   color:black;
-  margin-left: 1%;
   z-index: 1;
   border: 3px solid;
   padding: 0.25em 0.5em;
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+}
+
+.left-text {
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  background-color: white;
+  color:black;
+  z-index: 1;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  width: fit-content;
 }
 
 #b1 {
@@ -115,9 +104,10 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  margin: 1%;
 }
 
-.index-bookmark {
+/*.index-bookmark {
   font-family: "Open Sans", sans-serif;
   font-size: 10px;
   letter-spacing: 2px;
@@ -129,7 +119,7 @@ h1 {
   padding: 0.25em 0.5em;
   margin-left: 1%;
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
-}
+}*/
 
 .plant-links {
   position: absolute;
@@ -186,7 +176,7 @@ a:visited {
               z-index: 1;
   }
 
-  .button-54 {
+ .button-54 {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     letter-spacing: 2px;
@@ -213,27 +203,13 @@ a:visited {
     background-color: white;
     color:black;
     position: absolute;
-    margin-left: 1%;
-    z-index: 1;
+    margin: 1%;
     border: 3px solid;
     padding: 0.25em 0.5em;
-    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;  
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    width: min-content;
   }
 
   /*Plant.html*/
-  .button-container {
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    margin: 1%;
-  }
-
-  /*Calendar*/
-  .cal-container {
-    display: flex;
-    justify-content: center;
-  }
+ 
 

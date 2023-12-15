@@ -19,8 +19,6 @@ let wallColors = ['red','magenta','blue'];
 let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
 let index = 0;
 let partyCount;
-let storedBookmarks = JSON.parse(localStorage.getItem("bookmark"));
-let message = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
 
 const morning = {
   background: '#E5E7E9',
@@ -68,10 +66,8 @@ function preload(){
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
-  let p = document.createElement('p');
-  p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. ";
-  p.classList.add('index-bookmark');
-  document.querySelector('.text-container').appendChild(p);
+
+  //splash();
 
 }
 
@@ -184,12 +180,6 @@ function draw() {
   box(150, 10, 70);
   pop();
   pop();
-
-  //FrenchPress
-  //push();
-  //translate(200,250,200);
-  //drawFrenchPress();
-  //pop();
 
   //plant
   push()
@@ -431,68 +421,6 @@ function drawLight() {
   pop()  
 }
 
-//DOM 
-document.addEventListener('DOMContentLoaded', function () {
-//Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
-getBookmarks(storedBookmarks);
-
-//select item element
-const item = document.querySelector('.item');
-
-/*make draggable*/
-item.draggable = "true";
-
-/*add event listener*/
-item.addEventListener('dragstart', dragStart);
-
-function dragStart(e) {
-    e.dataTransfer.setData('text/plain', e.target.id);
-    setTimeout(() => {
-        e.target.classList.add('hide');
-    }, 0);
-}
-
-/* drop targets */
-const boxes = document.querySelectorAll('.box');
-
-boxes.forEach(box => {
-    box.addEventListener('dragenter', dragEnter)
-    box.addEventListener('dragover', dragOver);
-    box.addEventListener('dragleave', dragLeave);
-    box.addEventListener('drop', drop);
-
-/*Daily party indicator*/
-runAtSpecificTimeOfDay(6, 0, getPartyCount());
-});
-
-function dragEnter(e) {
-    e.preventDefault();
-    e.target.classList.add('drag-over');
-}
-
-function dragOver(e) {
-    e.preventDefault();
-    e.target.classList.add('drag-over');
-}
-
-function dragLeave(e) {
-    e.target.classList.remove('drag-over');
-}
-
-function drop(e) {
-    e.target.classList.remove('drag-over');
-
-    // get the draggable element
-    const id = e.dataTransfer.getData('text/plain');
-    const draggable = document.getElementById(id);
-
-    // add it to the drop target
-    e.target.appendChild(draggable);
-
-    // display the draggable element
-    draggable.classList.remove('hide');
-}
-
 function splash() {
   let splashscreen = document.querySelector('.splash');
   splashscreen.addEventListener('click',() => {
@@ -502,6 +430,10 @@ function splash() {
     },610)
   })
 }
+
+//DOM 
+document.addEventListener('DOMContentLoaded', function () {
+//Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
 
 /*Run a function once each day at set time function from
 https://gist.github.com/farhad-taran/f487a07c16fd53ee08a12a90cdaea082*/
@@ -522,21 +454,10 @@ function runAtSpecificTimeOfDay(hour, minutes, func)
     setInterval(func, twentyFourHours);
   }, eta_ms);
 }
-
 function getPartyCount() {
   let min = Math.ceil(1);
   let max = Math.floor(25);
   partyCount = Math.floor(Math.random() * (max - min) + min);
 }
-
-function getBookmarks(array) {
-  for (i=0; i<array.length;i++){
-    let p = document.createElement('p');
-    //p.setAttribute("id",'p');
-    p.innerHTML = array[i];
-    p.classList.add('index-bookmark');
-    document.querySelector('.text-container').appendChild(p);
-  }
-};
 
 })

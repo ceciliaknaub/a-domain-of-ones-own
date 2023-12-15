@@ -23,11 +23,6 @@ const date = new Date();
 let hour = date.getHours();
 
 createCanvas(w,h,WEBGL);
-//add sidebar text
-let p = document.createElement('p');
-p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
-p.classList.add('index-bookmark');
-document.querySelector('.text-container').appendChild(p);
 
 //sets the background room color based on time of day
 if (hour >= 20 || hour <= 5) {

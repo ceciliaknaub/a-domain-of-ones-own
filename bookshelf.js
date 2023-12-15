@@ -36,7 +36,7 @@ let test;
 let returnButton;
 let bookmarkButton;
 let x = 50;
-
+let storedBookmarks = JSON.parse(localStorage.getItem("bookmark"));
 
 class Book {
   constructor (w, h ,x ,y,img,title,author,font,textColor,quotes) {
@@ -156,10 +156,6 @@ let book;
 
 function setup() {
 createCanvas(w,h);
-let p = document.createElement('p');
-p.innerHTML = "Browse the books.";
-p.classList.add('index-bookmark');
-document.querySelector('.text-container').appendChild(p);
 
 //get the date to know the time of day, in hours
 const date = new Date();
@@ -215,7 +211,7 @@ function bookmarkText(title,author,quote,x,y) {
   h2.addClass('book-left');
 
   let h3 = createElement('h3',author)
-  h3.position(x, y+50);
+  h3.position(x, y+75);
   h3.addClass('book-left');
 
   //add a quote to the right page
@@ -242,3 +238,13 @@ function lastPage(quote,x,y) {
   p2.position(x + 250, y);
   p2.addClass('book-right');
 }
+
+function getBookmarks(array) {
+  for (i=0; i<array.length;i++){
+    let p = document.createElement('p');
+    //p.setAttribute("id",'p');
+    p.innerHTML = array[i];
+    p.classList.add('index-bookmark');
+    document.querySelector('.text-container').appendChild(p);
+  }
+};

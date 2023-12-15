@@ -86,7 +86,7 @@ class Book {
         bookmarkButton.mousePressed(() => {
           fill('yellow');
           rect(w/1.45,100,50,50);
-          localStorage.setItem(
+          sessionStorage.setItem(
             "bookmark",
             this.quotes[arrayPos]
           )

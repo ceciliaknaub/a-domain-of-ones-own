@@ -68,12 +68,14 @@ function setup() {
 
   runOncePerDay(); // run the code
 
-  /*let p = document.createElement('p');
-  //p.setAttribute("id",'p');
-  p.innerHTML = JSON.parse(localStorage.bookmark);
-  p.classList.add('left-text');
-  document.querySelector('.text-container').appendChild(p);*/
-  getBookmarks(localStorage.bookmark);
+  if (sessionStorage.bookmark == null) {
+    let p = document.createElement('p');
+    //p.setAttribute("id",'p');
+    p.innerHTML = sessionStorage.bookmark;
+    p.classList.add('.hide');
+  } else {
+    getBookmarks(sessionStorage.bookmark);
+  }
 }
 
 function draw() {
@@ -433,16 +435,6 @@ function getBookmarks(text) {
     document.querySelector('.text-container').appendChild(p);
 };
 
-/*function splash() {
-  let splashscreen = document.querySelector('.splash');
-  splashscreen.addEventListener('click',() => {
-    splashscreen.style.opacity=0;
-    setTimeout(()=>{
-      splashScreen.classList.add('hide')
-    },610)
-  })
-}*/
-
 /*https://stackoverflow.com/questions/11741979/run-code-once-a-day*/
 // checks if one day has passed. 
 function hasOneDayPassed() {
@@ -464,5 +456,5 @@ function runOncePerDay(){
 
   // your code below
   localStorage.partyCount = int(random(1,10));
-  localStorage.bookmark = null;
+  //sessionStorageStorage.bookmark = null;
 }

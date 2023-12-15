@@ -5,6 +5,9 @@ let cubeSize = window.innerHeight;
 let w = window.innerWidth;
 let h = window.innerHeight; 
 
+let x;
+let y;
+
 let ceilingColor;
 let floorColor;
 let gradientColor1;
@@ -17,6 +20,7 @@ let ceilingFlooorColors = [' #CC0000','#cc00cc',' #0000CC'];
 let index = 0;
 let partyCount;
 let storedBookmarks = JSON.parse(localStorage.getItem("bookmark"));
+let message = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
 
 const morning = {
   background: '#E5E7E9',
@@ -58,12 +62,17 @@ function preload(){
   book4 = loadImage('./assets/bell_hooks_cover.png');
   font1 = loadFont('./assets/Junge/Junge-Regular.ttf');
 
-  song = loadSound('./assets/party_song.mp3');
+  //song = loadSound('./assets/party_song.mp3');
 }
 
 function setup() {
   createCanvas(w, h, WEBGL);
   setInterval(changeColor, 750);
+  //let p = document.createElement('p');
+  //p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
+  //p.classList.add('index-bookmark');
+  //document.querySelector('.bookmark-container').appendChild(p);
+
 }
 
 function draw() {
@@ -196,6 +205,7 @@ function draw() {
   pop();
 
   push();
+  translate(-35,-285,-350);
   drawLight();
   pop();
 
@@ -390,15 +400,6 @@ function drawPlant() {
 
   pop();
   pop();
-
-  //let div = createElement('div')
-  /*div.position(w/2.15,h/1.5);
-  div.size(100,100);
-  div.addClass('drag-over')
-
-  let a = createA('http://www.google.com','')
-  a.parent(div);*/
-
 }
 
 function drawLeaf(x,y,z) {
@@ -427,8 +428,13 @@ function drawLight() {
   fill('yellow');
   translate(0,-15)
   sphere(5)
-  pop()
-  
+  pop()  
+}
+
+function ticker(message) {
+  text(message, x, y);
+  x -= 2;
+  if (x < 0 - textWidth(message)) x = width;
 }
 
 /*function getBookmarks() {
@@ -447,12 +453,8 @@ function drawLight() {
 //DOM 
 document.addEventListener('DOMContentLoaded', function () {
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
+getBookmarks(storedBookmarks);
 
-if (localStorage.getItem('bookmark') == null) {
-  window.addEventListener("load", getBookmarks(storedBookmarks));
-} else {
-  getBookmarks(storedBookmarks);
-}
 
 //select item element
 const item = document.querySelector('.item');

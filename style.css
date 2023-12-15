@@ -231,4 +231,9 @@ a:visited {
     margin: 1%;
   }
 
-  
+  /*Calendar*/
+  .cal-container {
+    display: flex;
+    justify-content: center;
+  }
+

@@ -13,6 +13,10 @@ let waterButton;
 let feedButton;
 let touchButton;
 
+let wateringCan;
+let platnFeed;
+let no;
+
 function setup(){
 //get the date to know the time of day, in hours
 const date = new Date();
@@ -51,8 +55,16 @@ feedButton.position(w/2.1,h/1.15);
 touchButton.position(w/1.75,h/1.15);
 
 waterButton.mousePressed(() => {
-  drawWater();
+  translate(-300,-200);
+    drawWateringCan();
 });
+
+
+feedButton.mousePressed(() => {
+  translate(100,-300);
+    drawPlantFeed();
+});
+
 
 }
 
@@ -99,4 +111,40 @@ function drawPlant() {
   function drawLeaf(x,y,z) {
     directionalLight(0,255,0, -0.25, 0, -1);
     ellipsoid(x,y,z);
+  }
+
+  function drawWateringCan() {
+    directionalLight(255, 0, 0, 0,0,-0.5);
+    
+    noStroke();
+    cylinder(50,200,40);
+    
+    push();
+    rotate(PI/4);
+    translate(75,-80,-5);
+    cylinder(5,225,10);
+    pop()
+    
+    push()
+    translate(-100,0);
+    cylinder(5,100,10);
+    pop()
+    
+    push()
+    rotate(PI/2);
+    translate(-30,50);
+    cylinder(5,100,10);
+    pop()
+    
+    push()
+    rotate(PI/2);
+    translate(30,50);
+    cylinder(5,100,10);
+    pop()
+  
+  }
+
+  function drawPlantFeed(){
+    fill('yellow');
+    rect(50,100,100);
   }

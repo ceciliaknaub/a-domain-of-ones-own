@@ -23,6 +23,7 @@ const date = new Date();
 let hour = date.getHours();
 
 createCanvas(w,h,WEBGL);
+//add sidebar text
 let p = document.createElement('p');
 p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
 p.classList.add('index-bookmark');
@@ -46,6 +47,7 @@ let btnCont = createElement('div');
 waterButton = createButton('Water');
 feedButton = createButton('Feed');
 touchButton = createButton('Touch');
+returnButton = createButton('Return Item');
 
 waterButton.parent(btnCont);
 feedButton.parent(btnCont);
@@ -71,6 +73,10 @@ feedButton.mousePressed(() => {
     drawPlantFeed();
 });
 
+touchButton.mousePressed(() => {
+  translate(100,-300);
+    drawTouch();
+});
 
 }
 
@@ -120,7 +126,7 @@ function drawPlant() {
   }
 
   function drawWateringCan() {
-    directionalLight(255, 0, 0, 0,0,-0.5);
+    directionalLight(0, 150, 150, 0,0,-0.5);
     
     noStroke();
     cylinder(50,200,40);
@@ -153,4 +159,12 @@ function drawPlant() {
   function drawPlantFeed(){
     fill('yellow');
     rect(50,100,100);
+  }
+
+  function drawTouch() {
+    directionalLight(255, 0, 0, 0,0,-0.5);
+    torus(100,25,50);
+  
+    rotate(PI/3);
+    cylinder(25,180,10);
   }

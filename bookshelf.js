@@ -79,12 +79,7 @@ class Book {
         returnButton.mousePressed(() => {
           removeElements();
           background(roomColor);
-           /*clear();
-         if (returnCount > 0) {
-            clear();
-            background(roomColor);
-          }
-          for (i = 50; i < 200; i+=5) {
+          /*for (i = 50; i < 250; i+=5) {
               push();
               stroke('black');
               beginShape();
@@ -96,9 +91,8 @@ class Book {
               vertex(450,50);
               vertex(250,75);
               endShape();
-            pop();
-            //console.log('return loop:' + ' ' + returnCount);
-        }*/
+            pop();}
+            //console.log('return loop:' + ' ' + returnCount);*/
       });
                
         //bookmark button creates a shape and saves the text to the bookmarks array
@@ -163,7 +157,7 @@ let book;
 function setup() {
 createCanvas(w,h);
 let p = document.createElement('p');
-p.innerHTML = "Welcome to the room. You could be sitting in one just like it. Time passes here. Look around. Engage with what you see. You might learn something, or get distracted; plan your next adventure, or just be.";
+p.innerHTML = "Browse the books.";
 p.classList.add('index-bookmark');
 document.querySelector('.text-container').appendChild(p);
 
@@ -221,7 +215,7 @@ function bookmarkText(title,author,quote,x,y) {
   h2.addClass('book-left');
 
   let h3 = createElement('h3',author)
-  h3.position(x, y+100);
+  h3.position(x, y+50);
   h3.addClass('book-left');
 
   //add a quote to the right page
@@ -242,3 +236,9 @@ function bookmarkText(title,author,quote,x,y) {
   vertex(250,75);
   endShape();
 };
+
+function lastPage(quote,x,y) {
+  let p2 = createElement('p',quote);
+  p2.position(x + 250, y);
+  p2.addClass('book-right');
+}

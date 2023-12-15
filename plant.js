@@ -9,24 +9,16 @@ let roomBackgroundColors = {
 
 let roomColor;
 
+let waterButton;
+let feedButton;
+let touchButton;
+
 function setup(){
-    createCanvas(w,h,WEBGL);
-    let btncont = document.querySelector('.button-container');
-    waterButton = createButton('Water');
-    waterButton.addClass('back-link');
-
-    feedButton = createButton('Feed');
-    feedButton.addClass('back-link');
-
-    waterButton.parent(btncont);
-    feedButton.parent(btncont);
-}
-
-function draw(){
-    //get the date to know the time of day, in hours
+//get the date to know the time of day, in hours
 const date = new Date();
 let hour = date.getHours();
 
+createCanvas(w,h,WEBGL);
 //sets the background room color based on time of day
 if (hour >= 20 || hour <= 5) {
   roomColor = roomBackgroundColors.night;
@@ -38,10 +30,38 @@ if (hour >= 20 || hour <= 5) {
 else {
   roomColor = roomBackgroundColors.morning;
 }
+background(roomColor);
+
+let btnCont = createElement('div');
+
+waterButton = createButton('Water');
+feedButton = createButton('Feed');
+touchButton = createButton('Touch');
+
+waterButton.parent(btnCont);
+feedButton.parent(btnCont);
+touchButton.parent(btnCont);
+
+waterButton.addClass('button-54');
+feedButton.addClass('button-54');
+touchButton.addClass('button-54');
+
+waterButton.position(w/2.75,h/1.15);
+feedButton.position(w/2.1,h/1.15);
+touchButton.position(w/1.75,h/1.15);
+
+waterButton.mousePressed(() => {
+  drawWater();
+});
+
+}
+
+function draw(){
+
+//draw plant
 noStroke();
 translate(0,100,0);
 drawPlant();
-
 
 }
 
@@ -54,13 +74,13 @@ function drawPlant() {
     pop()
     
     push()
-    translate(-45,-60,0);
+    translate(-45,-100,0);
     drawLeaf(20,100,10)
     pop()
     
     push()
-    translate(25,-40,0);
-    drawLeaf(10,20,10)
+    translate(45,-100,0);
+    drawLeaf(20,75,15)
     pop()
   
     //pot
@@ -73,16 +93,7 @@ function drawPlant() {
     cylinder(105,25)
   
     pop();
-    pop();
-  
-    //let div = createElement('div')
-    /*div.position(w/2.15,h/1.5);
-    div.size(100,100);
-    div.addClass('drag-over')
-  
-    let a = createA('http://www.google.com','')
-    a.parent(div);*/
-  
+    pop();  
   }
   
   function drawLeaf(x,y,z) {

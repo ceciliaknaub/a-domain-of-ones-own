@@ -79,7 +79,7 @@ function draw() {
       background(wallColors[index])
       ceilingColor = ceilingFlooorColors[index]
       floorColor = ceilingFlooorColors[index]
-      song.play();
+      //song.play();
     } else {
       background(night.background);
       ceilingColor = night.ceiling;
@@ -448,7 +448,11 @@ function drawLight() {
 document.addEventListener('DOMContentLoaded', function () {
 //Drag and Drop tutorial from https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/
 
-window.addEventListener("load", getBookmarks(storedBookmarks));
+if (localStorage.getItem('bookmark') == null) {
+  window.addEventListener("load", getBookmarks(storedBookmarks));
+} else {
+  getBookmarks(storedBookmarks);
+}
 
 //select item element
 const item = document.querySelector('.item');

@@ -223,11 +223,12 @@ a:visited {
   /*Plant.html*/
   .button-container {
     position: absolute;
-    height: 100%;
-    width: 33%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
-    margin-left: 1%;  
+    align-items: flex-end;
+    margin: 1%;
   }
+
+  

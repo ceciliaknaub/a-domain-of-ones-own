@@ -44,6 +44,7 @@ background(roomColor);
 inpDiv.classList.add('left-text');
 document.querySelector('.text-container').appendChild(inpDiv);
 
+//draw calendar image
 image(calendar,w/3,h/4,500,350);
 
 inp.input(() => {
@@ -51,6 +52,7 @@ inp.input(() => {
   sessionStorage.calendarEvent = userInput;
 });
 
+//create button
 scheduleButton = createButton('Schedule');
 scheduleButton.addClass('button-54');
 scheduleButton.position(w/2.15,h/1.25);

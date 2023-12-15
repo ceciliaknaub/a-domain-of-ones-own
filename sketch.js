@@ -67,15 +67,16 @@ function setup() {
   setInterval(changeColor, 750);
 
   runOncePerDay(); // run the code
-
-  if (sessionStorage.bookmark == null) {
-    let p = document.createElement('p');
-    //p.setAttribute("id",'p');
-    p.innerHTML = sessionStorage.bookmark;
-    p.classList.add('.hide');
-  } else {
-    getBookmarks(sessionStorage.bookmark);
-  }
+  if (sessionStorage.bookmark == null){
+    getBookmarks('Bookmark');
+} else {
+  getBookmarks(sessionStorage.bookmark);
+}
+if (sessionStorage.calendarEvent == null)  {
+  getCalendarEvent('Calender Event');
+} else {
+  getCalendarEvent(sessionStorage.calendarEvent);
+}
 }
 
 function draw() {
@@ -436,6 +437,15 @@ function getBookmarks(text) {
     p.style.backgroundColor = "yellow";
 };
 
+function getCalendarEvent(text) {
+  let p = document.createElement('p');
+  //p.setAttribute("id",'p');
+  p.innerHTML = text;
+  p.classList.add('left-text');
+  document.querySelector('.text-container').appendChild(p);
+  p.style.backgroundColor = "pink";
+};
+
 /*function splash() {
   let splashscreen = document.querySelector('.splash');
   splashscreen.addEventListener('click',() => {
@@ -467,5 +477,7 @@ function runOncePerDay(){
 
   // your code below
   localStorage.partyCount = int(random(1,10));
-  localStorage.bookmark = null;
+  sessionStorage.bookmark = 'Bookmarks';
+  sessionStorage.bookmark = 'calendarEvent';
+
 }

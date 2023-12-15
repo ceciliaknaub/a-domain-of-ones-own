@@ -41,16 +41,13 @@ else {
 background(roomColor);
 
 waterButton = createButton('Water');
-feedButton = createButton('Feed');
 touchButton = createButton('Touch');
 
 waterButton.addClass('button-54');
-feedButton.addClass('button-54');
 touchButton.addClass('button-54');
 
-waterButton.position(w/2.75,h/1.15);
-feedButton.position(w/2.1,h/1.15);
-touchButton.position(w/1.75,h/1.15);
+waterButton.position(w/2.5,h/1.15);
+touchButton.position(w/1.85,h/1.15);
 
 waterButton.mousePressed(() => {
   p.style.display = 'none';
@@ -58,13 +55,6 @@ waterButton.mousePressed(() => {
   translate(-300,-100);
     drawWateringCan(p);
 });
-
-feedButton.mousePressed(() => {
-  background(roomColor);
-  translate(-300,-100);
-    drawPlantFeed(p);
-});
-
 touchButton.mousePressed(() => {
   background(roomColor);
   translate(-300,-100);

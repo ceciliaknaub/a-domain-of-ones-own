@@ -74,7 +74,7 @@ function setup() {
   getBookmarks(sessionStorage.bookmark);
 }
 if (sessionStorage.calendarEvent == null)  {
-  getCalendarEvent('Calender Event');
+  getCalendarEvent('Reminder');
 } else {
   getCalendarEvent(sessionStorage.calendarEvent);
 }
@@ -88,7 +88,7 @@ function draw() {
   noStroke();
 
   if (hour >= 20 || hour <= 5) {
-    if(localStorage.getItem('partyCount') == 3) {
+    if(localStorage.getItem('partyCount') == 9) {
       background(wallColors[index])
       ceilingColor = ceilingFlooorColors[index]
       floorColor = ceilingFlooorColors[index]
@@ -214,11 +214,6 @@ if (angleY > 1.2) {
   }
   drawCalendar();
 }
-
-push();
-fill('black')
-textFont(font1);
-pop();
 }
 
 function drawBottomFace(color) {
@@ -361,7 +356,7 @@ function drawClock() {
   if(min < 10) {
     min = "0"+min
   }
-  //convert
+  //convert 24 hour time to 12 hour
   if (Hour % 12 == 0){
     Hour = 12
   } else {

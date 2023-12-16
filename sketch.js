@@ -465,7 +465,7 @@ function runOncePerDay(){
 
   // your code below
   localStorage.partyCount = int(random(1,10));
-  sessionStorage.bookmark = 'Bookmarks';
-  sessionStorage.bookmark = 'calendarEvent';
+  //sessionStorage.bookmark = 'Bookmarks';
+  //sessionStorage.bookmark = 'Calendar Event';
 
 }

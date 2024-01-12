@@ -183,7 +183,7 @@ function bookmarkText(title,author,quote,x,y) {
   h2.addClass('book-left');
 
   let h3 = createElement('p',author)
-  h3.position(x, y+75);
+  h3.position(x, y+50);
   h3.addClass('book-left');
 
   //add a quote to the right page
